@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .banner {
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .banner img {
+            width: 100%;
+            height: 123px;
+        }
+        .slides {
+            display: flex;
+            width: 100%; 
+            height: 20%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: black;
+            padding: 5px 30px;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            color: white;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .maya-btn {
+            flex: 1;
+            background: #dff4e2; 
+            color: #00A86B; 
+            padding: 14px 0;
+            border: none;
+            border-radius: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .maya-btn img {
+            width: 14px;
+            height: 14px;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #F7F9FA; -webkit-tap-highlight-color: transparent; }
+        .maya-green { color: #00C377; }
+        .bg-maya-green { background-color: #00C377; }
+        .bg-maya-light { background-color: #E6F9F1; }
+        .card { background: white; border-radius: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        button:active, a:active { transform: scale(0.96); transition: 0.1s; }
+        .active-tab { background-color: black; color: white; border-radius: 9999px; }
+    </style>
+</head>
+<body class="max-w-md mx-auto min-h-screen pb-24 relative">
+
+    <div id="toast" class="fixed bottom-28 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full text-xs font-medium opacity-0 transition-opacity duration-300 z-50 pointer-events-none"></div>
+
+    <header class="flex justify-between items-center p-6 bg-white sticky top-0 z-40">
+        <div class="flex items-center gap-1 font-bold text-lg cursor-pointer">
+            <span id="username-display">@dexterhlmn918</span>
+            <span class="maya-green text-sm">›</span>
+        </div>
+        <div class="flex gap-5">
+            <button onclick="showToast('Help')"><svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
+            <button onclick="showToast('Notifications')"><svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+        </div>
+    </header>
+
+   <nav class="flex gap-4 px-6 overflow-x-auto no-scrollbar bg-white pb-4 sticky top-[72px] z-40 border-b border-gray-50">
+    <a id="tab-wallet" href="indexx.html" class="px-5 py-2 font-semibold text-sm text-gray-400 block transition">Wallet</a>
+    
+    <button class="text-gray-400 font-semibold text-sm py-2">Savings</button>
+    
+    <a id="tab-credit" href="viewcreditt.html" class="px-5 py-2 font-semibold text-sm text-gray-400 block transition">Credit</a>
+    
+    <button class="text-gray-400 font-semibold text-sm py-2">Loans</button>
+    <button class="text-gray-400 font-semibold text-sm py-2">Cards</button>
+</nav>
+
+    <div id="wallet-view" class="p-4 space-y-6">
+        <div class="card p-6">
+            <div class="flex justify-between items-baseline mb-4">
+                <div>
+                    <span class="text-3xl font-bold">₱103,426.38</span>
+                    <p class="text-gray-400 text-sm">Wallet balance <span class="maya-green font-medium ml-1">Auto cash in</span></p>
+                </div>
+                <button onclick="showToast('Visibility Toggled')"><svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+            </div>
+            <div class="button-group">
+                <button onclick="showToast('Cash In')" class="maya-btn">
+                    <img src="img/ci.jpg" alt="">
+                    Cash in
+                </button>
+                <button onclick="showToast('Send')" class="maya-btn">
+                    <img src="img/co.jpg" alt="">
+                    Send
+                </button>
+            </div>
+            <div class="border-t pt-4 flex justify-between items-center cursor-pointer" onclick="switchView('credit')">
+                <div><p class="font-bold text-sm">Easy Credit <span class="maya-green">›</span></p><p class="text-gray-400 text-xs">Borrow Instantly</p></div>
+                <div class="text-right"><p class="font-bold text-sm">₱50,000.00</p><p class="text-gray-400 text-xs">Available credit</p></div>
+            </div>
+        </div>
+
+        <div id="services-grid" class="grid grid-cols-4 gap-y-8">
+            </div>
+
+        <div class="banner">
+            <div class="slides" id="slideBox">
+                <img src="img/b1.jpg">
+                <img src="img/b2.jpg">
+                <img src="img/b3.jpg">
+            </div>
+        </div>
+
+        <div class="card p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-bold">Transactions</h2>
+                <button onclick="showToast('See All')" class="maya-green text-sm font-bold">See all</button>
+            </div>
+            <div id="wallet-transactions-list" class="space-y-6">
+                </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="font-bold">Get rewards</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <div onclick="showToast('Missions')" class="bg-[#00C377] p-4 rounded-3xl h-32 text-white cursor-pointer relative overflow-hidden">
+                    <p class="font-bold text-sm">Missions</p>
+                    <p class="text-[10px] opacity-90">Earn rewards for tasks</p>
+                    <div class="absolute -right-2 -bottom-2 text-4xl opacity-30">🎯</div>
+                </div>
+                <div onclick="showToast('Vouchers')" class="bg-[#6042E5] p-4 rounded-3xl h-32 text-white cursor-pointer relative overflow-hidden">
+                    <p class="font-bold text-sm">Vouchers</p>
+                    <p class="text-[10px] opacity-90">Go claim them</p>
+                    <div class="absolute -right-2 -bottom-2 text-4xl opacity-30">🎟️</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-[10px] text-gray-400 space-y-3 pt-6">
+            <p class="text-maya-green font-black text-2xl italic opacity-40">maya</p>
+            <p>Regulated by Bangko Sentral ng Pilipinas – <span class="maya-green">bsp.gov.ph</span></p>
+            <p>Help Center: <span class="maya-green font-bold">+632 8845 7788</span></p>
+        </div>
+    </div>
+
+    <div id="credit-view" class="p-4 space-y-6 hidden">
+        <div class="card p-6">
+            <h2 class="font-bold text-lg mb-4">Credit Summary</h2>
+            <div class="space-y-3">
+                <div class="flex justify-between"><span class="text-gray-500 text-sm">Credit Limit:</span><span class="font-bold">₱50,000.00</span></div>
+                <div class="flex justify-between"><span class="text-gray-500 text-sm">Used Credit:</span><span class="font-bold">₱0.00</span></div>
+                <div class="flex justify-between"><span class="text-gray-500 text-sm">Available Credit:</span><span class="font-bold text-green-500">₱50,000.00</span></div>
+                <div class="flex justify-between"><span class="text-gray-500 text-sm">Outstanding Balance:</span><span class="font-bold">₱0.00</span></div>
+            </div>
+        </div>
+
+        <div class="card p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-bold">Credit Transactions</h2>
+                <button onclick="showToast('See All Credit')" class="maya-green text-sm font-bold">See all</button>
+            </div>
+            <div id="credit-transactions-list" class="space-y-6">
+                </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <div class="icon-box2"><img src="img/q1.jpg"></div>
+        <div class="icon-box2"><img src="img/q2.jpg"></div>
+        <div class="icon-box2"><img src="img/q3.jpg"></div>
+    </div>
+
+    <script>
+        // Data arrays transformed from original PHP array variables
+        const services = [
+            {name: 'Bank transfer', icon: '<img src="img/m1.jpg" class="w-8 h-8 object-contain">'},
+            {name: 'Raffle Promo', icon: '<img src="img/m2.jpg" class="w-8 h-8 object-contain">'},
+            {name: 'Crypto', icon: '<img src="img/m3.jpg" class="w-8 h-8 object-contain">'},
+            {name: 'Refer & Earn', icon: '<img src="img/m4.jpg" class="w-8 h-8 object-contain">', badge: 'Win ₱1K'},
+            {name: 'Load', icon: '<img src="img/m5.jpg" class="w-8 h-8 object-contain">'},
+            {name: 'Bills', icon: '<img src="img/m6.jpg" class="w-8 h-8 object-contain">'},
+            {name: 'More', icon: '•••'}
+        ];
+
+        const walletTransactions = [
+            {name: 'Maya Bank', desc: 'Paid amount due', date: '21 April 2026', amount: 14847.24, pos: true},
+            {name: 'MAYA', desc: 'Refunded money from', date: '16 Apr 2026', amount: 35.00, pos: true},
+            {name: 'MAYA', desc: 'Purchased on', date: '16 Apr 2026', amount: -35.00, pos: false},
+            {name: 'MAYA', desc: 'Refunded money from', date: '16 Apr 2026', amount: 20.00, pos: true},
+            {name: 'MAYA', desc: 'Purchased on', date: '16 Apr 2026', amount: -20.00, pos: false},
+            {name: 'GREEN PAPER 5140', desc: 'Purchased from', date: '06 Apr 2026', amount: -15000.00, pos: false}
+        ];
+
+        const creditTransactions = [
+            {name: 'DST', desc: 'Fee applied', date: '16 Mar 2026', amount: -4.32},
+            {name: 'Service Fee', desc: 'Fee applied', date: '16 Mar 2026', amount: -419.30}
+        ];
+
+        // Render Services List Loop
+        const servicesGrid = document.getElementById('services-grid');
+        services.forEach(s => {
+            const btn = document.createElement('button');
+            btn.className = 'flex flex-col items-center relative';
+            btn.onclick = () => showToast(s.name);
+            
+            let badgeHTML = '';
+            if(s.badge) {
+                badgeHTML = `<span class="absolute -top-2 right-0 bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase">${s.badge}</span>`;
+            }
+
+            btn.innerHTML = `
+                ${badgeHTML}
+                <div class="w-14 h-14 bg-gray rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-2">${s.icon}</div>
+                <span class="text-[11px] font-medium text-gray-500">${s.name}</span>
+            `;
+            servicesGrid.appendChild(btn);
+        });
+
+        // Render Wallet Transactions Loop
+        const walletTxList = document.getElementById('wallet-transactions-list');
+        walletTransactions.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'flex justify-between items-start cursor-pointer';
+            div.onclick = () => showToast('Detail');
+            
+            const formattedAmount = (t.pos ? '' : '-') + '₱' + Math.abs(t.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const textClass = t.pos ? 'text-green-500' : 'text-black';
+
+            div.innerHTML = `
+                <div>
+                    <p class="text-[11px] text-gray-400 mb-0.5">${t.desc}</p>
+                    <p class="font-bold text-sm">${t.name}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] text-gray-400 mb-0.5">${t.date}</p>
+                    <p class="font-bold text-sm ${textClass}">${formattedAmount}</p>
+                </div>
+            `;
+            walletTxList.appendChild(div);
+        });
+
+        // Render Credit Transactions Loop
+        const creditTxList = document.getElementById('credit-transactions-list');
+        creditTransactions.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'flex justify-between items-start cursor-pointer';
+            div.onclick = () => showToast('Detail');
+            
+            const formattedAmount = '-₱' + Math.abs(t.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            div.innerHTML = `
+                <div>
+                    <p class="text-[11px] text-gray-400 mb-0.5">${t.desc}</p>
+                    <p class="font-bold text-sm">${t.name}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] text-gray-400 mb-0.5">${t.date}</p>
+                    <p class="font-bold text-sm text-black">${formattedAmount}</p>
+                </div>
+            `;
+            creditTxList.appendChild(div);
+        });
+
+        // Tab Switching Logic Execution
+        function switchView(view) {
+            const walletView = document.getElementById('wallet-view');
+            const creditView = document.getElementById('credit-view');
+            const tabWallet = document.getElementById('tab-wallet');
+            const tabCredit = document.getElementById('tab-credit');
+
+            if (view === 'wallet') {
+                walletView.classList.remove('hidden');
+                creditView.classList.add('hidden');
+                tabWallet.className = 'px-5 py-2 font-semibold text-sm active-tab';
+                tabCredit.className = 'px-5 py-2 font-semibold text-sm text-gray-400';
+            } else if (view === 'credit') {
+                walletView.classList.add('hidden');
+                creditView.classList.remove('hidden');
+                tabWallet.className = 'px-5 py-2 font-semibold text-sm text-gray-400';
+                tabCredit.className = 'px-5 py-2 font-semibold text-sm active-tab';
+            }
+        }
+
+        // Toast functionality
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.opacity = '1';
+            setTimeout(() => { t.style.opacity = '0'; }, 1500);
+        }
+
+        // Carousel banner functionality
+        let index = 0;
+        const slides = document.getElementById("slideBox");
+        const totalSlides = 3;
+
+        setInterval(() => {
+            index++;
+            if (index >= totalSlides) {
+                index = 0;
+            }
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }, 3000);
+    </script>
+</body>
+</html>
