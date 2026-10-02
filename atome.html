@@ -137,6 +137,14 @@
             font-weight: 700;
         }
 
+        .card-header-row .eye-icon {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff; /* Change this to match your text color if needed */
+    display: inline-block;
+    vertical-align: middle;
+}
+
         .card-paylater .pay-text {
             margin-top: 10px;
         }
@@ -373,56 +381,71 @@
         <div class="top-cards-grid">
             <!-- 1. Card (Left, spanning 2 rows) -->
             <div class="card-box card-paylater">
-                <div>
-                    <div class="card-header-row">
-                        <h3>Card</h3>
-                        <span class="arrow-icon">👁</span>
-                    </div>
-                    <div class="savings-info">
-                    <div class="label">Availble Spending limit</div>
-                    <div class="amount-row">
-                        <div class="amount">₱10,000.00</div>
-                    </div>
-                    <div class="amount-row">
-                        <div class="deposit-link">Manage > </div>
-                    </div>
-                </div>
-                </div>
-                
+    <div>
+        <div class="card-header-row">
+            <h3>Card</h3>
+            <!-- Replaced 👁 with an inline SVG eye icon -->
+            <span class="arrow-icon">
+                <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </span>
+        </div>
+        <div class="savings-info">
+            <div class="label">Available Spending limit</div>
+            <div class="amount-row">
+                <div class="amount">₱10,000.00</div>
             </div>
+            <div class="amount-row">
+                <div class="deposit-link">Manage > </div>
+            </div>
+        </div>
+    </div>
+</div>
 
             <!-- 2. Cash (Top Right) -->
             <div class="card-box card-cash">
                 <div class="card-savings-top">
-                    <h3>Cash</h3>
-                    <span class="eye-icon">👁</span>
-                </div>
-                <div class="savings-info">
-                    <div class="label">Availble Limit</div>
-                    <div class="amount-row">
-                        <div class="amount">₱4,000.00</div>
-                    </div>
-                    <div class="amount-row">
-                        <div class="deposit-link">Manage > </div>
-                    </div>
-                </div>
+    <h3>Cash</h3>
+    <span class="eye-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; vertical-align: middle;">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+    </span>
+</div>
+<div class="savings-info">
+    <div class="label">Available Limit</div>
+    <div class="amount-row">
+        <div class="amount">₱4,000.00</div>
+    </div>
+    <div class="amount-row">
+        <div class="deposit-link">Manage > </div>
+    </div>
+</div>
             </div>
 
             <!-- 3. Savings (Bottom Right) -->
             <div class="card-box card-savings">
                 <div class="card-savings-top">
-                    <h3>Savings</h3>
-                    <span class="eye-icon">👁</span>
-                </div>
-                <div class="savings-info">
-                    <div class="label">Total Savings</div>
-                    <div class="amount-row">
-                        <div class="amount">₱0.00</div>
-                    </div>
-                    <div class="amount-row">
-                        <div class="deposit-link">Deposit ></div>
-                    </div>
-                </div>
+    <h3>Savings</h3>
+    <span class="eye-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; vertical-align: middle;">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+    </span>
+</div>
+<div class="savings-info">
+    <div class="label">Total Savings</div>
+    <div class="amount-row">
+        <div class="amount">₱0.00</div>
+    </div>
+    <div class="amount-row">
+        <div class="deposit-link">Deposit ></div>
+    </div>
+</div>
             </div>
         </div>
 
