@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>My Vouchers</title>
 <style>
     :root {
@@ -22,17 +22,24 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    body {
+    html, body {
+        width: 100%;
+        height: 100%;
         background-color: var(--bg-gray);
+    }
+
+    body {
         display: flex;
         justify-content: center;
     }
 
     .app-container {
         width: 100%;
-        max-width: 480px; /* Mobile width constraint */
+        max-width: 480px; 
         background-color: #fff;
-        height: 100vh;
+        /* Use dynamic viewport height to prevent browser UI from hiding the bottom */
+        height: 100vh; 
+        height: 100dvh; 
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -46,9 +53,7 @@
         padding: 15px;
         background-color: #fff;
         border-bottom: 1px solid var(--border-color);
-        position: sticky;
-        top: 0;
-        z-index: 10;
+        flex-shrink: 0; /* Prevent squishing */
     }
 
     .back-btn {
@@ -76,6 +81,8 @@
         border-bottom: 1px solid var(--border-color);
         background-color: #fff;
         white-space: nowrap;
+        flex-shrink: 0;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
     }
     
     .tabs::-webkit-scrollbar {
@@ -111,6 +118,7 @@
         padding: 12px 15px;
         background-color: #fff;
         border-bottom: 1px solid var(--bg-gray);
+        flex-shrink: 0;
     }
 
     .action-item {
@@ -139,6 +147,7 @@
         background-color: var(--light-red);
         margin: 10px;
         border-radius: 4px;
+        flex-shrink: 0;
     }
     .vip-banner-text h4 {
         font-size: 14px;
@@ -148,6 +157,7 @@
     .vip-banner-text p {
         font-size: 11px;
         color: var(--text-gray);
+        line-height: 1.3;
     }
     .vip-btn {
         background-color: var(--primary-red);
@@ -157,6 +167,8 @@
         border-radius: 2px;
         font-size: 12px;
         cursor: pointer;
+        flex-shrink: 0;
+        margin-left: 10px;
     }
 
     /* Scrollable Voucher List */
@@ -165,6 +177,7 @@
         overflow-y: auto;
         padding: 0 10px 20px 10px;
         background-color: var(--bg-gray);
+        -webkit-overflow-scrolling: touch;
     }
 
     .voucher-card {
@@ -175,6 +188,7 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         position: relative;
         overflow: hidden;
+        min-height: 80px; /* Ensure uniform height */
     }
 
     /* The "New" Tag */
@@ -192,7 +206,7 @@
 
     /* Voucher Icon Area */
     .voucher-icon {
-        width: 100px;
+        flex: 0 0 90px; /* Use flex-basis instead of fixed width to prevent squishing */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -219,55 +233,61 @@
     .voucher-icon .icon-main {
         font-size: 24px;
         font-weight: bold;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
     .voucher-icon .icon-sub {
         font-size: 10px;
+        line-height: 1.1;
     }
 
     /* Voucher Details Area */
     .voucher-details {
         flex: 1;
-        padding: 12px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        min-width: 0; /* Prevents text overflow breaking the flex layout */
     }
     .voucher-title {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         margin-bottom: 4px;
         color: var(--text-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Truncates long text on small screens */
     }
     .voucher-subtitle {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--text-dark);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
     .voucher-expiry {
-        font-size: 11px;
+        font-size: 10px;
         color: var(--text-gray);
     }
 
     /* Voucher Action Area */
     .voucher-action {
-        width: 70px;
+        flex: 0 0 70px; /* Secure width strictly to flex-basis */
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-right: 10px;
+        padding: 0 10px;
     }
+    
     .use-btn {
         background-color: transparent;
         color: var(--primary-red);
         border: 1px solid var(--primary-red);
-        padding: 6px 12px;
+        padding: 6px 0;
         border-radius: 4px;
         font-size: 12px;
         cursor: pointer;
         width: 100%;
+        text-align: center;
     }
-
 </style>
 </head>
 <body>
@@ -328,7 +348,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 1 (Red) -->
+        <!-- Voucher Card 2 (Red) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon red">
@@ -345,7 +365,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 1 (Red) -->
+        <!-- Voucher Card 3 (Red) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon red">
@@ -362,7 +382,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 2 (Red) -->
+        <!-- Voucher Card 4 (Red) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon red">
@@ -379,7 +399,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 2 (Red) -->
+        <!-- Voucher Card 5 (Red) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon red">
@@ -396,7 +416,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 3 (Shopee Straight Payment) -->
+        <!-- Voucher Card 6 (Shopee Straight Payment) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon red">
@@ -413,7 +433,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 4 (BPI Installment) -->
+        <!-- Voucher Card 7 (BPI Installment) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon white">
@@ -430,7 +450,7 @@
             </div>
         </div>
 
-        <!-- Voucher Card 5 (Green Free Shipping) -->
+        <!-- Voucher Card 8 (Green Free Shipping) -->
         <div class="voucher-card">
             <div class="new-tag">New</div>
             <div class="voucher-icon green">
