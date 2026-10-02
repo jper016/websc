@@ -14,28 +14,18 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: scroll; /* Background scrolls naturally with the page */
             margin: 0;
             padding: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        
-        /* App Container Layout */
-        .app-container {
-            width: 100%;
-            max-width: 400px;
-            background-color: transparent;
-            height: 100vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
 
         /* Custom Content Wrapper Layout */
         .app-content {
+            width: 100%;
+            max-width: 400px;
             position: relative;
             z-index: 10;
             display: flex;
@@ -44,6 +34,7 @@
             padding-bottom: 2rem;
             padding-left: 1rem;
             padding-right: 1rem;
+            box-sizing: border-box;
         }
 
         /* Top Nav Styles */
@@ -52,7 +43,7 @@
             justify-content: space-between;
             align-items: center;
             color: white;
-            margin-bottom: 1rem; /* Adjusted margin to fit header */
+            margin-bottom: 1rem;
             padding-left: 0.25rem;
             padding-right: 0.25rem;
         }
@@ -62,6 +53,10 @@
             border-radius: 9999px;
             transition: background-color 0.2s;
             position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
         }
         .app-icon-btn:hover {
             background-color: rgba(255, 255, 255, 0.1);
@@ -174,153 +169,140 @@
 </head>
 <body>
 
-    <div class="app-container">
+    <!-- Main Content Wrapper Directly Inside Body -->
+    <div class="app-content">
         
-        <!-- Main Content Area -->
-        <div class="app-content">
+        <!-- Top Nav -->
+        <div class="app-topnav">
+            <button class="app-icon-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="app-icon-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    <path d="M12 9h.01"/>
+                    <path d="M11 12h1v4h1"/>
+                </svg>
+                <span style="position: absolute; top: 6px; left: 9px; font-size: 10px; font-weight: bold; color: currentColor;">?</span>
+            </button>
+        </div>
+
+        <!-- Header Text Section -->
+        <div class="app-header-text">
+            <h1 class="app-header-title">Atome Cash</h1>
+            <p class="app-header-subtitle">Flexible cash, fast approval</p>
+        </div>
+
+        <!-- Available Loan Limit Card -->
+        <div class="app-loan-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.3);"></div>
             
-            <!-- Top Nav -->
-            <div class="app-topnav">
-                <button class="app-icon-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                </button>
-                <button class="app-icon-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                        <path d="M12 9h.01"/>
-                        <path d="M11 12h1v4h1"/>
-                    </svg>
-                    <!-- Small question mark inside the chat bubble -->
-                    <span style="position: absolute; top: 6px; left: 9px; font-size: 10px; font-weight: bold; color: currentColor;">?</span>
-                </button>
+            <div style="display: flex; align-items: center; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; margin-bottom: 4px; gap: 4px;">
+                Available loan limit 
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
             </div>
+            <div style="font-size: 25px; font-weight: 700; color: white; margin-bottom: 1.25rem; letter-spacing: -0.025em;">₱1,366.67</div>
+            
+            <button class="app-loan-btn">
+                Request loan
+            </button>
+        </div>
 
-            <!-- Newly Added Header Text Section -->
-            <div class="app-header-text">
-                <h1 class="app-header-title">Atome Cash</h1>
-                <p class="app-header-subtitle">Flexible cash, fast approval</p>
-            </div>
-
-            <!-- Available Loan Limit Card -->
-            <div class="app-loan-card">
-                <!-- Inner top highlight -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.3);"></div>
-                
-                <div style="display: flex; align-items: center; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; margin-bottom: 4px; gap: 4px;">
-                    Available loan limit 
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-                    </svg>
-                </div>
-                <div style="font-size: 25px; font-weight: 700; color: white; margin-bottom: 1.25rem; letter-spacing: -0.025em;">₱1,366.67</div>
-                
-                <button class="app-loan-btn">
-                    Request loan
-                </button>
-            </div>
-
-            <!-- Recent Paid Bills Card -->
-            <div class="app-bills-card">
-                <!-- Subtle green top gradient -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
-                    <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
-                    <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
-                        View History 
-                        <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
-                    <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
-                    Keep repaying on time to unlock bigger Atome Cash offers.
-                </div>
-            </div>
-
-            <div class="app-bills-card">
-                <!-- Subtle green top gradient -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
-                    <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
-                    <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
-                        View History 
-                        <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
-                    <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
-                    Keep repaying on time to unlock bigger Atome Cash offers.
-                </div>
-            </div>
-
-            <div class="app-bills-card">
-                <!-- Subtle green top gradient -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
-                    <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
-                    <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
-                        View History 
-                        <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
-                    <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
-                    Keep repaying on time to unlock bigger Atome Cash offers.
-                </div>
-            </div>
-
-            <!-- Atome Savings Banner -->
-            <div class="app-savings-card">
-                <!-- Content Area -->
-                <div style="width: 60%; padding: 1rem; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="font-size: 11px; font-weight: bold; color: black; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">atome savings</div>
-                    <div style="font-size: 14px; font-weight: bold; color: black; line-height: 1.25; padding-right: 0.5rem;">
-                        Boost Atome Card approval chances by 5x!
-                    </div>
-                </div>
-                <!-- Image Background Area -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 55%; z-index: 0;">
-                    <!-- Fading mask -->
-                    <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: linear-gradient(to right, #f0eae1, transparent); z-index: 10;"></div>
-                    <!-- Mock image -->
-                    <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?auto=format&fit=crop&w=300&q=80" 
-                         alt="Savings Promotion" 
-                         style="width: 100%; height: 100%; object-fit: cover; object-position: top left; opacity: 0.9; mix-blend-mode: multiply;" />
-                    <!-- Rendered credit card mock -->
-                    <div style="position: absolute; bottom: 8px; left: 24px; width: 40px; height: 28px; background: black; border-radius: 2px; transform: rotate(-12deg); display: flex; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
-                         <div style="width: 100%; height: 100%; background: #1e1e1e; position: relative;">
-                             <div style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 9999px; background: #fbbc04;"></div>
-                             <div style="position: absolute; top: 4px; right: 2px; width: 8px; height: 8px; border-radius: 9999px; background: #ea4335; opacity: 0.8; mix-blend-mode: screen;"></div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Action -->
-            <div class="app-help-card">
-                <h2 style="font-size: 18px; font-weight: 700; color: #111827; margin: 0;">We're here to help</h2>
-                <button style="display: flex; align-items: center; font-size: 14px; font-weight: 500; color: #4b5563; background: none; border: none; cursor: pointer;">
-                    More 
-                    <svg style="margin-left: 4px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Recent Paid Bills Cards -->
+        <div class="app-bills-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
+                <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
+                    View History 
+                    <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
                 </button>
             </div>
-
+            
+            <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
+                <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
+                Keep repaying on time to unlock bigger Atome Cash offers.
+            </div>
         </div>
+
+        <div class="app-bills-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
+                <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
+                    View History 
+                    <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
+                <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
+                Keep repaying on time to unlock bigger Atome Cash offers.
+            </div>
+        </div>
+
+        <div class="app-bills-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0;">Recent Paid Bills</h2>
+                <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
+                    View History 
+                    <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10;">
+                <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
+                Keep repaying on time to unlock bigger Atome Cash offers.
+            </div>
+        </div>
+
+        <!-- Atome Savings Banner -->
+        <div class="app-savings-card">
+            <div style="width: 60%; padding: 1rem; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
+                <div style="font-size: 11px; font-weight: bold; color: black; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">atome savings</div>
+                <div style="font-size: 14px; font-weight: bold; color: black; line-height: 1.25; padding-right: 0.5rem;">
+                    Boost Atome Card approval chances by 5x!
+                </div>
+            </div>
+            <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 55%; z-index: 0;">
+                <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: linear-gradient(to right, #f0eae1, transparent); z-index: 10;"></div>
+                <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?auto=format&fit=crop&w=300&q=80" 
+                     alt="Savings Promotion" 
+                     style="width: 100%; height: 100%; object-fit: cover; object-position: top left; opacity: 0.9; mix-blend-mode: multiply;" />
+                <div style="position: absolute; bottom: 8px; left: 24px; width: 40px; height: 28px; background: black; border-radius: 2px; transform: rotate(-12deg); display: flex; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="width: 100%; height: 100%; background: #1e1e1e; position: relative;">
+                        <div style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 9999px; background: #fbbc04;"></div>
+                        <div style="position: absolute; top: 4px; right: 2px; width: 8px; height: 8px; border-radius: 9999px; background: #ea4335; opacity: 0.8; mix-blend-mode: screen;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Action -->
+        <div class="app-help-card">
+            <h2 style="font-size: 18px; font-weight: 700; color: #111827; margin: 0;">We're here to help</h2>
+            <button style="display: flex; align-items: center; font-size: 14px; font-weight: 500; color: #4b5563; background: none; border: none; cursor: pointer;">
+                More 
+                <svg style="margin-left: 4px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
     </div>
 
 </body>
