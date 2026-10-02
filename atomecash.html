@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atome Cash Replica</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom scrollbar for mobile container */
+        .mobile-container::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-slate-900 m-0 p-0">
+
+    <div class="mobile-container w-full max-w-md h-[100vh] sm:h-[860px] bg-slate-50 overflow-y-auto relative shadow-2xl sm:rounded-[3rem] border-0 sm:border-8 border-slate-800 flex flex-col justify-between">
+        
+        <!-- Top Gradient Header Area -->
+        <div class="bg-gradient-to-b from-[#14b8a6] via-[#0d9488] to-[#0f766e] text-white pt-6 pb-8 px-5 relative overflow-hidden flex-shrink-0">
+            
+            <!-- Top Navigation Bar -->
+            <div class="flex justify-between items-center mb-6">
+                <button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition">
+                    <i class="fa-solid fa-chevron-left text-lg"></i>
+                </button>
+                <button class="w-9 h-9 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-question text-sm text-white"></i>
+                </button>
+            </div>
+
+            <!-- Title & Subtitle + 3D Money Bag Illustration -->
+            <div class="flex justify-between items-start relative z-10">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight mb-1">Atome Cash</h1>
+                    <p class="text-white/80 text-xs font-medium">Flexible cash, fast approval</p>
+                </div>
+
+                <!-- Custom SVG 3D Money Bag & Coins Representation -->
+                <div class="relative w-28 h-20 -mr-2 -mt-4 flex items-end justify-end">
+                    <!-- Gold Stack -->
+                    <div class="absolute right-0 bottom-0 flex flex-col items-center">
+                        <div class="w-7 h-3 bg-amber-300 rounded-full border border-amber-500 shadow-sm flex items-center justify-center text-[8px] font-bold text-amber-900">₱</div>
+                        <div class="w-7 h-3 bg-amber-400 rounded-full border border-amber-600 shadow-sm -mt-1"></div>
+                        <div class="w-7 h-3 bg-amber-400 rounded-full border border-amber-600 shadow-sm -mt-1"></div>
+                        <div class="w-7 h-3 bg-amber-500 rounded-full border border-amber-700 shadow-sm -mt-1"></div>
+                    </div>
+                    <!-- Money Bag -->
+                    <div class="absolute right-5 bottom-0">
+                        <div class="w-16 h-16 bg-blue-600 rounded-t-[50%] rounded-b-[40%] shadow-lg relative flex items-center justify-center border-2 border-blue-400">
+                            <!-- Drawstring bow -->
+                            <div class="absolute -top-2 w-10 h-3 bg-amber-300 rounded-full border border-amber-500 flex items-center justify-around px-1">
+                                <div class="w-2 h-2 rounded-full bg-amber-200"></div>
+                                <div class="w-2 h-2 rounded-full bg-amber-200"></div>
+                            </div>
+                            <!-- Peso symbol on bag -->
+                            <span class="text-white font-extrabold text-lg mt-2 drop-shadow">₱</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Loan Limit Card (Translucent White) -->
+            <div class="mt-6 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/30 shadow-lg relative z-10">
+                <div class="flex items-center gap-1.5 text-white/90 text-xs font-medium mb-1">
+                    <span>Available loan limit</span>
+                    <i class="fa-regular fa-circle-question text-xs opacity-80 cursor-pointer"></i>
+                </div>
+                <div class="text-2xl font-extrabold tracking-tight mb-4 text-white">
+                    ₱1,366.67
+                </div>
+                <button onclick="openModal('Request Loan', 'Your request for a loan of ₱1,366.67 is being prepared.')" class="w-full bg-white hover:bg-slate-100 text-[#0f766e] font-bold py-3 rounded-xl shadow-md transition duration-200 text-sm tracking-wide">
+                    Request loan
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content White Area with Rounded Top Curve -->
+        <div class="bg-slate-50 flex-1 -mt-3 rounded-t-[24px] px-4 pt-5 pb-8 space-y-4 relative z-20 shadow-inner overflow-y-auto">
+            
+            <!-- Current Bill Card -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-slate-900 text-base">Current Bill</span>
+                    <button onclick="openModal('Bills', 'Navigating to Bills management...')" class="text-xs font-semibold text-slate-900 hover:text-[#0f766e] flex items-center gap-1">
+                        Go to Bills <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-slate-400 font-medium mb-4">Due on 2 Jun</p>
+
+                <div class="flex justify-between items-center mb-3">
+                    <div class="text-2xl font-extrabold text-slate-900">
+                        ₱2,900.53
+                    </div>
+                    <button onclick="openModal('Pay Early', 'Proceeding to early payment checkout.')" class="border border-slate-300 hover:border-slate-800 text-slate-900 font-semibold px-4 py-2 rounded-xl text-xs transition duration-150">
+                        Pay Early
+                    </button>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
+                    <span>Pay on time to keep your good record</span>
+                </div>
+            </div>
+
+            <!-- Recent Paid Bills Section -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-slate-900 text-base">Recent Paid Bills</span>
+                    <button onclick="openModal('History', 'Loading complete payment history.')" class="text-xs font-semibold text-slate-900 hover:text-[#0f766e] flex items-center gap-1">
+                        View History <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+                <div class="text-xs text-slate-600 leading-relaxed font-normal">
+                    <strong class="text-slate-900 font-bold">35 bills paid.</strong> Keep it up! Keep repaying on time to unlock bigger Atome Cash offers.
+                </div>
+            </div>
+
+            <!-- Atome Savings Banner Card -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 flex flex-col cursor-pointer hover:shadow-md transition" onclick="openModal('Atome Savings', 'Opening Atome Savings & Card boost details.')">
+                <div class="p-4 pb-2">
+                    <div class="font-extrabold text-slate-900 text-sm mb-1 tracking-tight">atome savings</div>
+                    <div class="font-bold text-slate-800 text-sm leading-snug">Boost Atome Card approval chances by 5x!</div>
+                </div>
+                <!-- Banner Image Simulation matching screenshot -->
+                <div class="w-full h-32 bg-gradient-to-r from-amber-50 to-orange-50 relative overflow-hidden flex items-end justify-end px-4">
+                    <!-- Illustration simulation -->
+                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#0f766e_1px,transparent_1px)] [background-size:12px_12px]"></div>
+                    <div class="flex items-center gap-2 mb-3 relative z-10">
+                        <!-- Simulated phone mockup graphic -->
+                        <div class="w-12 h-20 bg-slate-900 rounded-lg shadow-md border-2 border-slate-700 p-1 flex flex-col justify-between transform rotate-[-12deg]">
+                            <div class="w-3 h-1 bg-slate-700 rounded-full mx-auto"></div>
+                            <div class="w-full h-10 bg-teal-500 rounded flex items-center justify-center text-[6px] text-white font-bold">Atome</div>
+                        </div>
+                        <!-- Simulated card graphic -->
+                        <div class="w-14 h-9 bg-black rounded-md shadow-md border border-amber-400 p-1 flex flex-col justify-between transform rotate-[8deg]">
+                            <div class="text-[6px] text-amber-300 font-bold">atome</div>
+                            <div class="w-3 h-2 bg-amber-300 rounded-[2px]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- We're here to help Section -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex justify-between items-center cursor-pointer hover:bg-slate-50 transition" onclick="openModal('Help Center', 'Opening Atome Help & Support center.')">
+                <span class="font-bold text-slate-900 text-base">We're here to help</span>
+                <span class="text-xs font-semibold text-slate-900 hover:text-[#0f766e] flex items-center gap-1">
+                    More <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Custom Modal for simulated clicks without alert() -->
+    <div id="customModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center transform transition-all scale-95 opacity-0" id="modalContent">
+            <div class="w-12 h-12 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-2">Notice</h3>
+            <p id="modalDesc" class="text-sm text-slate-600 mb-6">Description message goes here.</p>
+            <button onclick="closeModal()" class="w-full bg-[#0f766e] hover:bg-teal-800 text-white font-semibold py-2.5 rounded-xl transition">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, desc) {
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+    </script>
+
+</body>
+</html>
