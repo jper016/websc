@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atome App - Profile Screen</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        /* Hide scrollbars for clean app appearance */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Specific Atome Colors */
+        .bg-atome-yellow {
+            background-color: #FFF100;
+        }
+        .text-atome-dark {
+            color: #171A21;
+        }
+        .text-atome-muted {
+            color: #8B8F9A;
+        }
+        .bg-atome-badge {
+            background-color: #FF5A5F;
+        }
+        
+        /* Banner Gradient matching original image */
+        .banner-gradient {
+            background: linear-gradient(115deg, #CFB883 0%, #BAA169 50%, #9F854F 100%);
+        }
+
+        /* Smooth Bottom Sheet Slide Up Animation */
+        .modal-enter {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-enter-active {
+            transform: translateY(0%);
+        }
+
+        /* Subtle click effect */
+        .active-tap:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* Banner Phone Screen Graphic Styling */
+        .phone-mockup-shadow {
+            box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: #ffffff;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 15;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .bottom-nav .nav-item img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    /* Optional: use CSS filter if you need to change the image color to match active/inactive states */
+}
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+        }
+
+        .nav-item.active {
+            color: #111;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center sm:py-8 antialiased">
+
+    <!-- Top Bar Controls for Frame Switch (Desktop View) -->
+    <div class="fixed top-3 z-50 hidden sm:flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-gray-200 text-xs font-medium text-gray-700">
+        <span><i class="fa-solid fa-mobile-screen text-amber-500 mr-1.5"></i>Atome App View</span>
+        <div class="h-3 w-px bg-gray-300"></div>
+        <button id="toggleFrameBtn" class="hover:text-black transition">Toggle Full View</button>
+        <div class="h-3 w-px bg-gray-300"></div>
+        <button id="resetDemoBtn" class="hover:text-black transition"><i class="fa-solid fa-rotate-right mr-1"></i>Reset Demo</button>
+    </div>
+
+    <!-- Main Container Frame -->
+    <div id="appContainer" class="w-full max-w-[420px] bg-white min-h-screen sm:min-h-[860px] sm:max-h-[900px] sm:rounded-[40px] sm:shadow-2xl sm:border-[10px] sm:border-slate-800 relative flex flex-col overflow-hidden transition-all duration-300">
+        
+        <!-- Mobile Viewport Scroll Area -->
+        <main id="scrollViewport" class="flex-1 overflow-y-auto no-scrollbar pb-24 bg-white">
+            
+            <!-- Profile Info Header Section -->
+            <section class="px-5 pt-8 pb-4">
+                <h1 class="text-[26px] font-extrabold text-atome-dark tracking-tight leading-tight uppercase">
+                    JOHN DELOS REYES
+                </h1>
+                <p class="text-[14px] font-semibold text-atome-muted mt-1 tracking-wide">
+                    +63 ****** *513
+                </p>
+            </section> 
+
+            <!-- 3 Quick Access Cards Grid -->
+            <section class="px-4 py-2">
+                <div class="grid grid-cols-3 gap-2.5">
+                    
+                    <!-- Card 1: Atome+ -->
+                    <div onclick="openModal('atomePlusModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-2 border border-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="20">
+  <!-- White background circle with a bold dark outline -->
+  <circle cx="50" cy="50" r="44" fill="#ffffff" stroke="#111827" stroke-width="8" />
+  
+  <!-- Yellow "a+" text -->
+  <text x="50" y="58" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="46" fill="#FACC15" text-anchor="middle">a+</text>
+</svg>
+</div>
+                        <span class="font-bold text-[14px] text-atome-dark leading-tight">Atome+</span>
+                        <span class="text-[12px] font-semibold text-atome-muted mt-1">159 points</span>
+                    </div>
+
+                    <!-- Card 2: Messages -->
+                    <div onclick="openModal('messagesModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
+                        <div class="w-10 h-10 flex items-center justify-center mb-2">
+                            <!-- Yellow Speech Bubble Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="20">
+  <!-- White background chat bubble with a bold dark outline and bottom tail -->
+  <path d="M50 12 C28 12 10 28 10 48 C10 59 16 68 25 74 L21 90 L39 82 C42 83 46 84 50 84 C72 84 90 68 90 48 C90 28 72 12 50 12 Z" 
+        fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" />
+  
+  <!-- Three yellow dots -->
+  <circle cx="36" cy="48" r="6" fill="#FACC15" />
+  <circle cx="50" cy="48" r="6" fill="#FACC15" />
+  <circle cx="64" cy="48" r="6" fill="#FACC15" />
+</svg>
+                        </div>
+                        <span class="font-bold text-[14px] text-atome-dark leading-tight">Messages</span>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="w-2 h-2 rounded-full bg-red-500 inline-block"></span>
+                            <span class="text-[12px] font-semibold text-atome-muted">19 new</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Vouchers -->
+                    <div onclick="openModal('vouchersModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
+                        <div class="w-5 h-49 flex items-center justify-center mb-2">
+                            <!-- Ticket Icon -->
+                            <svg class="w-8 h-8" viewBox="0 0 25 24" fill="none" stroke="#171A21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V9z"/>
+                                <line x1="9" y1="12" x2="15" y2="12" stroke-dasharray="2 2"/>
+                            </svg>
+                        </div>
+                        <span class="font-bold text-[14px] text-atome-dark leading-tight">Vouchers</span>
+                        <span class="text-[12px] font-semibold text-atome-muted mt-1">No voucher</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 1: Manage -->
+            <section class="mt-6 px-5">
+                <h2 class="text-[20px] font-bold text-atome-dark tracking-tight mb-3">Manage</h2>
+                
+                <div onclick="openModal('paymentMethodModal')" class="flex items-center justify-between py-3.5 border-b border-gray-100 cursor-pointer active-tap">
+                    <div class="flex items-center gap-3.5">
+                        <!-- Credit Card Outline Icon -->
+                        <svg class="w-6 h-6 text-atome-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <rect x="2" y="5" width="20" height="14" rx="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="2" y1="10" x2="22" y2="10" stroke-linecap="round"/>
+                        </svg>
+                        <span class="text-[16px] font-semibold text-atome-dark">Payment Method</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Promo Banner Carousel -->
+            <section class="mt-5 px-4">
+                <div id="carouselBanner" class="banner-gradient rounded-2xl p-4 relative overflow-hidden shadow-sm flex items-center justify-between h-[115px] cursor-pointer active-tap transition" onclick="triggerToast('Opening Atome Savings Guide...')">
+                    
+                    <!-- Left Banner Text -->
+                    <div class="z-10 max-w-[62%]">
+                        <p class="text-[11px] font-bold text-white/90 tracking-wide uppercase">Atome Savings Guide</p>
+                        <h3 class="text-[18px] font-extrabold text-white leading-snug mt-1 tracking-tight">
+                            How to open your Atome Savings
+                        </h3>
+                    </div>
+
+                    <!-- Right Graphic: Realistic Phone Mockup -->
+                    <div class="relative w-[110px] h-[130px] flex-shrink-0 -mr-2 -mb-6 flex items-end justify-center">
+                        <div class="w-[95px] h-[130px] bg-slate-900 rounded-t-[18px] p-1 border-t-2 border-x-2 border-slate-700 phone-mockup-shadow transform -rotate-3 overflow-hidden">
+                            <!-- Screen -->
+                            <div class="w-full h-full bg-[#FFF000] rounded-t-[14px] p-1.5 flex flex-col justify-between">
+                                <!-- Dynamic Mini UI Screen -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-[7px] font-bold text-black">Atome Savings</div>
+                                        <div class="w-1.5 h-1.5 rounded-full bg-black/30"></div>
+                                    </div>
+                                    <div class="bg-white/90 rounded p-1 text-[6.5px] font-bold text-black leading-tight shadow-2xs">
+                                        Make every peso count, the easy way
+                                    </div>
+                                    <div class="text-[5.5px] font-semibold text-black/70 mt-1">
+                                        Get up to 6.00% p.a. interest daily
+                                    </div>
+                                </div>
+
+                                <!-- Blue Action Button -->
+                                <div class="bg-blue-600 text-[6px] font-bold text-white text-center py-0.5 rounded shadow-xs mb-3">
+                                    Apply now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel Pagination Indicators -->
+                <div class="flex items-center justify-center gap-1.5 mt-3">
+                    <button onclick="switchBanner(0)" class="carousel-dot w-2 h-2 rounded-full bg-slate-400 transition-all"></button>
+                    <button onclick="switchBanner(1)" class="carousel-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+                    <button onclick="switchBanner(2)" class="carousel-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+                </div>
+            </section>
+
+            <!-- Section 2: Referrals -->
+            <section class="mt-5 px-5">
+                <h2 class="text-[20px] font-bold text-atome-dark tracking-tight mb-2">Referrals</h2>
+                
+                <!-- Item 1: Refer Atome Card -->
+                <div onclick="openModal('referralModal')" class="flex items-center justify-between py-3.5 border-b border-gray-100 cursor-pointer active-tap">
+                    <div class="flex items-center gap-3.5">
+                        <!-- Envelope + Card Outline Icon -->
+                        <div class="w-6 h-6 flex items-center justify-center text-atome-dark">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 8L12 13L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10H12" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="text-[16px] font-semibold text-atome-dark">Refer Atome Card</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <!-- Coral Badge -->
+                        <span class="bg-[#FF6056] text-white text-[12px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-xs">
+                            🔥 Claim ₱7,800
+                        </span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Item 2: Atome Cashback -->
+                <div onclick="openModal('cashbackModal')" class="flex items-center justify-between py-3.5 border-b border-gray-100 cursor-pointer active-tap">
+                    <div class="flex items-center gap-3.5">
+                        <!-- Cashback Coin + Arrow Icon -->
+                        <div class="w-6 h-6 flex items-center justify-center text-atome-dark">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="8"/>
+                                <path d="M12 9V15M10 11.5H13.5C14 11.5 14.5 11 14.5 10.5C14.5 10 14 9.5 13.5 9.5H10.5M10.5 14.5H14" stroke-linecap="round"/>
+                                <path d="M12 2A10 10 0 0 1 21.5 9.5" stroke-dasharray="2 2"/>
+                            </svg>
+                        </div>
+                        <span class="text-[16px] font-semibold text-atome-dark">Atome Cashback</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Section 3: Preference -->
+            <section class="mt-6 px-5">
+                <h2 class="text-[20px] font-bold text-atome-dark tracking-tight mb-2">Preference</h2>
+                
+                <!-- Item 1: Saved -->
+                <div onclick="openModal('savedModal')" class="flex items-center justify-between py-3.5 border-b border-gray-100 cursor-pointer active-tap">
+                    <div class="flex items-center gap-3.5">
+                        <!-- Bookmark Outline Icon -->
+                        <svg class="w-6 h-6 text-atome-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                        </svg>
+                        <span class="text-[16px] font-semibold text-atome-dark">Saved</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+
+                <!-- Item 2: Following -->
+                <div onclick="openModal('followingModal')" class="flex items-center justify-between py-3.5 border-b border-gray-100 cursor-pointer active-tap">
+                    <div class="flex items-center gap-3.5">
+                        <!-- Star Outline Icon -->
+                        <svg class="w-6 h-6 text-atome-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                        <span class="text-[16px] font-semibold text-atome-dark">Following</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Fixed Bottom Navigation Bar -->
+        <div class="bottom-nav">
+            <a href="atomee.html" style="text-decoration: none; color: inherit;">
+    <button class="nav-item active">
+        <img src="img/aa1.jpg" alt="Home" width="24" height="24">
+        Home
+    </button></a>
+    <button class="nav-item">
+        <img src="img/aa2.jpg" alt="Shop" width="24" height="24">
+        Shop
+    </button>
+    <button class="nav-item">
+        <img src="img/aa3.jpg" alt="Bills" width="24" height="24">
+        Bills
+    </button>
+    <a href="atomeprofile.html" style="text-decoration: none; color: inherit;">
+    <button class="nav-item">
+        <img src="img/aa4.jpg" alt="Me" width="24" height="24">
+        Me
+    </button>
+</a>
+
+        <!-- Modal Backdrop & Bottom Sheets -->
+        <div id="modalOverlay" class="absolute inset-0 bg-black/40 backdrop-blur-xs z-40 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeModal()"></div>
+
+        <!-- Payment Method Modal -->
+        <div id="paymentMethodModal" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-50 modal-enter transition-transform duration-300 shadow-2xl">
+            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+            <h3 class="text-lg font-extrabold text-atome-dark mb-1">Payment Methods</h3>
+            <p class="text-xs text-atome-muted mb-4">Manage your linked credit and debit cards.</p>
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3.5 border border-gray-200 rounded-xl bg-gray-50">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-cc-visa text-blue-800 text-2xl"></i>
+                        <div>
+                            <div class="text-xs font-bold text-atome-dark">Visa •••• 4829</div>
+                            <div class="text-[10px] text-atome-muted">Default Payment</div>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-green-600">Active</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-cc-mastercard text-orange-600 text-2xl"></i>
+                        <div>
+                            <div class="text-xs font-bold text-atome-dark">Mastercard •••• 1092</div>
+                            <div class="text-[10px] text-atome-muted">Linked Card</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closeModal()" class="w-full bg-atome-dark text-white font-bold py-3 rounded-xl mt-6">
+                Done
+            </button>
+        </div>
+
+        <!-- Atome+ Modal -->
+        <div id="atomePlusModal" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-50 modal-enter transition-transform duration-300 shadow-2xl">
+            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-[#FFF000] flex items-center justify-center font-extrabold text-black">a+</div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-atome-dark">Atome+ Rewards</h3>
+                    <p class="text-xs text-atome-muted">Current Balance: <strong class="text-black">29 Points</strong></p>
+                </div>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                Earn points with every transaction using Atome. Redeem your points for exclusive vouchers and discounts!
+            </p>
+            <button onclick="closeModal()" class="w-full bg-atome-yellow text-black font-extrabold py-3 rounded-xl">
+                Redeem Rewards
+            </button>
+        </div>
+
+        <!-- Referral Modal -->
+        <div id="referralModal" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-50 modal-enter transition-transform duration-300 shadow-2xl">
+            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+            <div class="text-center">
+                <div class="text-4xl mb-2">🔥</div>
+                <h3 class="text-xl font-extrabold text-atome-dark">Refer & Earn ₱7,800</h3>
+                <p class="text-xs text-atome-muted mt-1 px-4">Share your unique code with friends and claim rewards when they make their first payment.</p>
+                
+                <div class="my-4 bg-gray-100 p-3 rounded-xl font-mono text-sm font-bold text-gray-800 tracking-wider flex justify-between items-center px-4">
+                    <span>JASPER-731</span>
+                    <button onclick="copyReferralCode()" class="text-xs text-blue-600 font-sans font-bold">Copy</button>
+                </div>
+
+                <button onclick="closeModal()" class="w-full bg-atome-dark text-white font-bold py-3 rounded-xl">
+                    Share Link
+                </button>
+            </div>
+        </div>
+
+        <!-- Generic / Fallback Modal -->
+        <div id="genericModal" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-50 modal-enter transition-transform duration-300 shadow-2xl">
+            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+            <h3 id="genericTitle" class="text-lg font-extrabold text-atome-dark">Details</h3>
+            <p id="genericText" class="text-xs text-atome-muted my-3">Information loading...</p>
+            <button onclick="closeModal()" class="w-full bg-atome-dark text-white font-bold py-3 rounded-xl mt-4">
+                Close
+            </button>
+        </div>
+
+        <!-- Toast Notification Box -->
+        <div id="toast" class="absolute top-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg z-50 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-atome-yellow"></i>
+            <span id="toastMsg">Notification</span>
+        </div>
+
+    </div>
+
+    <script>
+        // Banner content slider data
+        const banners = [
+            {
+                title: "How to open your Atome Savings",
+                tag: "Atome Savings Guide",
+                bg: "linear-gradient(115deg, #CFB883 0%, #BAA169 50%, #9F854F 100%)"
+            },
+            {
+                title: "Get up to 6.00% daily interest!",
+                tag: "High Yield Savings",
+                bg: "linear-gradient(115deg, #2B303A 0%, #171A21 100%)"
+            },
+            {
+                title: "Apply Atome Card in 2 Minutes",
+                tag: "Exclusive Offer",
+                bg: "linear-gradient(115deg, #E29578 0%, #B85B43 100%)"
+            }
+        ];
+
+        let currentBannerIndex = 0;
+        const bannerEl = document.getElementById('carouselBanner');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function switchBanner(index) {
+            currentBannerIndex = index;
+            const b = banners[index];
+            
+            // Update dot styles
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-gray-300');
+                    dot.classList.add('bg-slate-700', 'w-4');
+                } else {
+                    dot.classList.remove('bg-slate-700', 'w-4');
+                    dot.classList.add('bg-gray-300', 'w-2');
+                }
+            });
+
+            // Transition effect
+            bannerEl.style.opacity = '0.8';
+            setTimeout(() => {
+                bannerEl.style.background = b.bg;
+                bannerEl.querySelector('p').innerText = b.tag;
+                bannerEl.querySelector('h3').innerText = b.title;
+                bannerEl.style.opacity = '1';
+            }, 150);
+        }
+
+        // Initialize carousel dots
+        switchBanner(0);
+
+        // Auto slide carousel every 4 seconds
+        setInterval(() => {
+            currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+            switchBanner(currentBannerIndex);
+        }, 4500);
+
+        // Modal Management
+        function openModal(modalId, title, text) {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            
+            if (title && text) {
+                document.getElementById('genericTitle').innerText = title;
+                document.getElementById('genericText').innerText = text;
+                const modal = document.getElementById('genericModal');
+                modal.classList.add('modal-enter-active');
+            } else {
+                const modal = document.getElementById(modalId) || document.getElementById('genericModal');
+                modal.classList.add('modal-enter-active');
+            }
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            
+            document.querySelectorAll('.modal-enter').forEach(m => {
+                m.classList.remove('modal-enter-active');
+            });
+        }
+
+        // Specific trigger helpers
+        function openModalByName(name) {
+            if (name === 'messagesModal') {
+                openModal('genericModal', 'Messages', 'You have 19 unread notifications regarding cashback and rewards.');
+            } else if (name === 'vouchersModal') {
+                openModal('genericModal', 'Vouchers', 'You currently have no active discount vouchers available.');
+            } else if (name === 'cashbackModal') {
+                openModal('genericModal', 'Atome Cashback', 'Accumulate cashback on every successful scan-to-pay transaction.');
+            } else if (name === 'savedModal') {
+                openModal('genericModal', 'Saved Items', 'Your saved wishlist items will appear here.');
+            } else if (name === 'followingModal') {
+                openModal('genericModal', 'Following', 'Stores and merchants you follow will be listed here.');
+            }
+        }
+
+        // Override inline call for generic options
+        window.openModal = function(id) {
+            if (['messagesModal', 'vouchersModal', 'cashbackModal', 'savedModal', 'followingModal'].includes(id)) {
+                openModalByName(id);
+            } else {
+                const overlay = document.getElementById('modalOverlay');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                const target = document.getElementById(id);
+                if (target) target.classList.add('modal-enter-active');
+            }
+        };
+
+        // Navigation Tab Switching Logic
+        function switchTab(el, tabName) {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active-tab', 'text-atome-dark');
+                tab.classList.add('text-gray-400');
+                const label = tab.querySelector('span');
+                if (label) label.classList.remove('font-bold');
+            });
+
+            el.classList.add('active-tab', 'text-atome-dark');
+            el.classList.remove('text-gray-400');
+            const activeLabel = el.querySelector('span');
+            if (activeLabel) activeLabel.classList.add('font-bold');
+
+            triggerToast(`Switched to ${tabName} tab`);
+        }
+
+        // Toast Message Notification
+        function triggerToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2000);
+        }
+
+        // Copy Referral Code
+        function copyReferralCode() {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = "JASPER-731";
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            triggerToast("Referral code copied!");
+        }
+
+        // Toggle Desktop Frame / Fullview
+        const toggleFrameBtn = document.getElementById('toggleFrameBtn');
+        const appContainer = document.getElementById('appContainer');
+        let isFullView = false;
+
+        toggleFrameBtn?.addEventListener('click', () => {
+            isFullView = !isFullView;
+            if (isFullView) {
+                appContainer.classList.remove('max-w-[420px]', 'sm:min-h-[860px]', 'sm:max-h-[900px]', 'sm:rounded-[40px]', 'sm:border-[10px]');
+                appContainer.classList.add('max-w-full', 'h-screen');
+                toggleFrameBtn.innerText = "Toggle Mobile Frame";
+            } else {
+                appContainer.classList.add('max-w-[420px]', 'sm:min-h-[860px]', 'sm:max-h-[900px]', 'sm:rounded-[40px]', 'sm:border-[10px]');
+                appContainer.classList.remove('max-w-full', 'h-screen');
+                toggleFrameBtn.innerText = "Toggle Full View";
+            }
+        });
+
+        document.getElementById('resetDemoBtn')?.addEventListener('click', () => {
+            closeModal();
+            switchBanner(0);
+            triggerToast("Demo Reset");
+        });
+    </script>
+</body>
+</html>

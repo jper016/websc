@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atome Cash Dashboard Replicate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Body & Background Settings */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('img/ab.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll; /* Background scrolls naturally with the page */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Custom Content Wrapper Layout */
+        .app-content {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    box-sizing: border-box;
+}
+
+        /* Top Nav Styles */
+        .app-topnav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            margin-bottom: 1rem;
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+
+        .app-icon-btn {
+            padding: 0.25rem;
+            border-radius: 9999px;
+            transition: background-color 0.2s;
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+        .app-icon-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header Text Styles */
+        .app-header-text {
+            color: white;
+            padding-left: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .app-header-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .app-header-subtitle {
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 4px;
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        /* Loan Limit Card Styles */
+        .app-loan-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(24px);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-loan-btn {
+            width: 100%;
+            background-color: white;
+            color: #0fb0a3;
+            font-weight: 700;
+            font-size: 1rem;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            border-radius: 10px;
+            transition: transform 0.1s;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border: none;
+            cursor: pointer;
+        }
+        .app-loan-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Recent Paid Bills Card Styles */
+        .app-bills-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 0rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* Atome Savings Banner Styles */
+        .app-savings-card {
+            border-radius: 16px;
+            height: 110px;
+            background: rgba(240, 234, 225, 0.95);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .app-savings-card:active {
+            opacity: 0.9;
+        }
+
+        /* Footer Help Card Styles */
+        .app-help-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .app-help-card:active {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Scrollbar hiding */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content Wrapper Directly Inside Body -->
+    <div class="app-content">
+        
+        <!-- Top Nav -->
+        <div class="app-topnav">
+            <a href="atomee.html" style="text-decoration: none;">
+    <button class="app-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+        </svg>
+    </button>
+</a>
+            <button class="app-icon-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 16.5C20 17.88 18.88 19 17.5 19H14.5l-2.5 3-2.5-3H6.5C5.12 19 4 17.88 4 16.5v-9C4 6.12 5.12 5 6.5 5h11C18.88 5 20 6.12 20 7.5v9z"></path>
+                        <path d="M9.5 10c0-1.5 1.5-2.5 2.5-2.5s2.5 1 2.5 2.5c0 1.5-1.5 2-1.5 3.5"></path>
+                        <circle cx="12" cy="16" r="0.8" fill="currentColor"></circle>
+                    </svg>
+            </button> 
+        </div>
+
+        <!-- Header Text Section -->
+        <div class="app-header-text">
+            <h1 class="app-header-title">Atome Cash</h1>
+            <p class="app-header-subtitle">Flexible cash, fast approval</p>
+        </div>
+
+        <!-- Available Loan Limit Card -->
+        <div class="app-loan-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.3);"></div>
+            
+            <div style="display: flex; align-items: center; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; margin-bottom: 4px; gap: 4px;">
+                Available loan limit 
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+            </div>
+            <div style="font-size: 20px; font-weight: 600; color: white; margin-bottom: 1.25rem; letter-spacing: -0.025em;">₱100,000.00</div>
+            
+            <button class="app-loan-btn">
+                Request loan
+            </button>
+        </div>
+
+        <!-- Recent Paid Bills Cards -->
+        <div class="app-bills-card">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4rem; background: linear-gradient(to bottom, rgba(229,252,247,0.8), transparent); pointer-events: none;"></div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 10;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #111827; margin: 10px;">Recent Paid Bills</h2>
+                <button style="display: flex; align-items: center; font-size: 13px; font-weight: 500; color: #1f2937; background: none; border: none; cursor: pointer;">
+                    View History 
+                    <svg style="margin-left: 2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="font-size: 14px; color: #1f2937; line-height: 1.4; position: relative; z-index: 10; margin: 10px;">
+                <span style="font-weight: bold;">35</span> bills paid. Keep it up!<br>
+                Keep repaying on time to unlock bigger Atome Cash offers.
+            </div>
+        </div>
+
+        <!-- Atome Savings Banner -->
+        <div class="app-savings-card">
+            <div style="width: 60%; padding: 1rem; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
+                <div style="font-size: 11px; font-weight: bold; color: black; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">atome savings</div>
+                <div style="font-size: 14px; font-weight: bold; color: black; line-height: 1.25; padding-right: 0.5rem;">
+                    Boost Atome Card approval chances by 5x!
+                </div>
+            </div>
+            <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 55%; z-index: 0;">
+                <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: linear-gradient(to right, #f0eae1, transparent); z-index: 10;"></div>
+                <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?auto=format&fit=crop&w=300&q=80" 
+                     alt="Savings Promotion" 
+                     style="width: 100%; height: 100%; object-fit: cover; object-position: top left; opacity: 0.9; mix-blend-mode: multiply;" />
+                <div style="position: absolute; bottom: 8px; left: 24px; width: 40px; height: 28px; background: black; border-radius: 2px; transform: rotate(-12deg); display: flex; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="width: 100%; height: 100%; background: #1e1e1e; position: relative;">
+                        <div style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 9999px; background: #fbbc04;"></div>
+                        <div style="position: absolute; top: 4px; right: 2px; width: 8px; height: 8px; border-radius: 9999px; background: #ea4335; opacity: 0.8; mix-blend-mode: screen;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-savings-card">
+            <div style="width: 60%; padding: 1rem; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
+                <div style="font-size: 11px; font-weight: bold; color: black; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">atome cash</div>
+                <div style="font-size: 14px; font-weight: bold; color: black; line-height: 1.25; padding-right: 0.5rem;">
+                    Low rates everyday
+Competitive interest rates starting from 1%
+                </div>
+            </div>
+            <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 55%; z-index: 0;">
+                <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: linear-gradient(to right, #f0eae1, transparent); z-index: 10;"></div>
+                <img src="img/a3.jpg" 
+                     alt="Savings Promotion" 
+                     style="width: 100%; height: 100%; object-fit: cover; object-position: top left; opacity: 0.9; mix-blend-mode: multiply;" />
+                <div style="position: absolute; bottom: 8px; left: 24px; width: 40px; height: 28px; background: black; border-radius: 2px; transform: rotate(-12deg); display: flex; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="width: 100%; height: 100%; background: #1e1e1e; position: relative;">
+                        <div style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 9999px; background: #fbbc04;"></div>
+                        <div style="position: absolute; top: 4px; right: 2px; width: 8px; height: 8px; border-radius: 9999px; background: #ea4335; opacity: 0.8; mix-blend-mode: screen;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Action -->
+        <div class="app-help-card">
+            <h2 style="font-size: 18px; font-weight: 700; color: #111827; margin: 0;">We're here to help</h2>
+            <button style="display: flex; align-items: center; font-size: 14px; font-weight: 500; color: #4b5563; background: none; border: none; cursor: pointer;">
+                More 
+                <svg style="margin-left: 4px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>
