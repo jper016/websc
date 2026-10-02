@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Vouchers</title>
+<style>
+    :root {
+        --primary-red: #ee4d2d;
+        --light-red: #ffe9e3;
+        --green: #26a59a;
+        --text-dark: #333;
+        --text-gray: #757575;
+        --bg-gray: #f5f5f5;
+        --border-color: #e0e0e0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+        background-color: var(--bg-gray);
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-container {
+        width: 100%;
+        max-width: 480px; /* Mobile width constraint */
+        background-color: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #fff;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .back-btn {
+        font-size: 20px;
+        color: var(--primary-red);
+        cursor: pointer;
+    }
+
+    .header-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    .history-link {
+        font-size: 14px;
+        color: var(--text-gray);
+        cursor: pointer;
+    }
+
+    /* Tabs */
+    .tabs {
+        display: flex;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--border-color);
+        background-color: #fff;
+        white-space: nowrap;
+    }
+    
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab {
+        padding: 12px 15px;
+        font-size: 14px;
+        color: var(--text-gray);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .tab.active {
+        color: var(--primary-red);
+        font-weight: 500;
+    }
+
+    .tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 15%;
+        width: 70%;
+        height: 2px;
+        background-color: var(--primary-red);
+    }
+
+    /* Action Bar */
+    .action-bar {
+        display: flex;
+        padding: 12px 15px;
+        background-color: #fff;
+        border-bottom: 1px solid var(--bg-gray);
+    }
+
+    .action-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--text-dark);
+        border-right: 1px solid var(--border-color);
+    }
+    .action-item:last-child {
+        border-right: none;
+    }
+    .action-icon {
+        margin-right: 5px;
+        color: var(--primary-red);
+    }
+
+    /* VIP Banner */
+    .vip-banner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: var(--light-red);
+        margin: 10px;
+        border-radius: 4px;
+    }
+    .vip-banner-text h4 {
+        font-size: 14px;
+        color: var(--primary-red);
+        margin-bottom: 2px;
+    }
+    .vip-banner-text p {
+        font-size: 11px;
+        color: var(--text-gray);
+    }
+    .vip-btn {
+        background-color: var(--primary-red);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 2px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    /* Scrollable Voucher List */
+    .voucher-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 10px 20px 10px;
+        background-color: var(--bg-gray);
+    }
+
+    .voucher-card {
+        display: flex;
+        background-color: #fff;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* The "New" Tag */
+    .new-tag {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: var(--primary-red);
+        color: #fff;
+        font-size: 9px;
+        padding: 2px 5px;
+        border-bottom-left-radius: 4px;
+        z-index: 2;
+    }
+
+    /* Voucher Icon Area */
+    .voucher-icon {
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-right: 1px dashed var(--border-color);
+        position: relative;
+    }
+
+    .voucher-icon.red { background-color: var(--primary-red); }
+    .voucher-icon.green { background-color: var(--green); }
+    .voucher-icon.white { 
+        background-color: #fff; 
+        color: var(--text-dark);
+    }
+    .voucher-icon.white img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .voucher-icon .icon-main {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+    .voucher-icon .icon-sub {
+        font-size: 10px;
+    }
+
+    /* Voucher Details Area */
+    .voucher-details {
+        flex: 1;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .voucher-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: var(--text-dark);
+    }
+    .voucher-subtitle {
+        font-size: 12px;
+        color: var(--text-dark);
+        margin-bottom: 6px;
+    }
+    .voucher-expiry {
+        font-size: 11px;
+        color: var(--text-gray);
+    }
+
+    /* Voucher Action Area */
+    .voucher-action {
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 10px;
+    }
+    .use-btn {
+        background-color: transparent;
+        color: var(--primary-red);
+        border: 1px solid var(--primary-red);
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- Header -->
+    <header class="header">
+        <div class="back-btn">&larr;</div>
+        <div class="header-title">My Vouchers</div>
+        <div class="history-link">History</div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs">
+        <div class="tab active">All (136)</div>
+        <div class="tab">Shopee (134)</div>
+        <div class="tab">ShopeeVIP (0)</div>
+        <div class="tab">Shop (0)</div>
+        <div class="tab">Digital (0)</div>
+    </nav>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+        <div class="action-item">
+            <span class="action-icon">⌨</span> Input promo code
+        </div>
+        <div class="action-item">
+            <span class="action-icon">🎫</span> Get more vouchers
+        </div>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="voucher-list">
+        
+        <!-- VIP Banner -->
+        <div class="vip-banner">
+            <div class="vip-banner-text">
+                <h4>ShopeeVIP</h4>
+                <p>Enjoy UNLI Free Shipping no min. spend, 20% off vouchers and 0% interest up to 3 mos. daily.</p>
+            </div>
+            <button class="vip-btn">VIEW &gt;</button>
+        </div>
+
+        <!-- Voucher Card 1 (Red) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">%</div>
+                <div class="icon-sub">Mega Discount</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">5% off Max ₱250 off</div>
+                <div class="voucher-subtitle">Min. Spend ₱100</div>
+                <div class="voucher-expiry" style="color: #ee4d2d;">Expiring: 13 hours left T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 1 (Red) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">%</div>
+                <div class="icon-sub">Mega Discount</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">7% off Max ₱500 off</div>
+                <div class="voucher-subtitle">Min. Spend ₱250</div>
+                <div class="voucher-expiry" style="color: #ee4d2d;">Expiring: 13 hours left T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 1 (Red) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">%</div>
+                <div class="icon-sub">Mega Discount</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">10% off Max ₱750 off</div>
+                <div class="voucher-subtitle">Min. Spend ₱500</div>
+                <div class="voucher-expiry" style="color: #ee4d2d;">Expiring: 13 hours left T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 2 (Red) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">%</div>
+                <div class="icon-sub">Mega Discount</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">13% off Max ₱2K off</div>
+                <div class="voucher-subtitle">Min. Spend ₱3K</div>
+                <div class="voucher-expiry" style="color: #ee4d2d;">Expiring: 13 hours left T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 2 (Red) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">%</div>
+                <div class="icon-sub">Mega Discount</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">40% off Max ₱40K off</div>
+                <div class="voucher-subtitle">Min. Spend ₱80K</div>
+                <div class="voucher-expiry">Valid Till: 10.10.2026 T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 3 (Shopee Straight Payment) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon red">
+                <div class="icon-main">S</div>
+                <div class="icon-sub">Straight Payment</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">8% off Max ₱13.5K off</div>
+                <div class="voucher-subtitle">Min. Spend ₱80K</div>
+                <div class="voucher-expiry">Valid Till: 11.10.2026 T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 4 (BPI Installment) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon white">
+                <div style="font-weight: bold; color: red; font-size: 20px;">BPI</div>
+                <div class="icon-sub">Installment</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">5% off Max ₱8K off</div>
+                <div class="voucher-subtitle">Min. Spend ₱0</div>
+                <div class="voucher-expiry">Valid Till: 11.10.2026 T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+
+        <!-- Voucher Card 5 (Green Free Shipping) -->
+        <div class="voucher-card">
+            <div class="new-tag">New</div>
+            <div class="voucher-icon green">
+                <div class="icon-main" style="font-size: 16px;">FREE</div>
+                <div class="icon-sub" style="font-size: 20px;">🚚</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-title">Shipping Discount up to ₱165 off</div>
+                <div class="voucher-subtitle">Min. Spend ₱999</div>
+                <div class="voucher-expiry">Valid Till: 31.10.2026 T&amp;C</div>
+            </div>
+            <div class="voucher-action">
+                <button class="use-btn">Use</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
