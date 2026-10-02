@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #f6f6f6;
             color: #111;
             display: flex;
             flex-direction: column;
@@ -29,7 +29,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px 16px 20px;
-            background: #ffffff;
+            background: #f6f6f6;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -369,6 +369,13 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
+        .bottom-nav .nav-item img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    /* Optional: use CSS filter if you need to change the image color to match active/inactive states */
+}
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -398,7 +405,9 @@
     <!-- Header -->
     <div class="app-header">
         <div class="logo">
-            atome <span style="font-size: 20px; margin-left: -2px;">A</span>
+            atome <span style="font-size: 20px; margin-left: -2px; display: inline-flex; align-items: center;">
+    <img src="img/aa5.jpg" alt="icon" style="width: 40px; height: 34px; object-fit: contain;">
+</span>
         </div>
         <div class="points-badge">
             <div class="points-icon">a+</div> 
@@ -514,23 +523,23 @@
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <button class="nav-item active">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Home
-        </button>
-        <button class="nav-item">
-            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-            Shop
-        </button>
-        <button class="nav-item">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            Bills
-        </button>
-        <button class="nav-item">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            Me
-        </button>
-    </div>
+    <button class="nav-item active">
+        <img src="img/aa1.jpg" alt="Home" width="24" height="24">
+        Home
+    </button>
+    <button class="nav-item">
+        <img src="img/aa2.jpg" alt="Shop" width="24" height="24">
+        Shop
+    </button>
+    <button class="nav-item">
+        <img src="img/aa3.jpg" alt="Bills" width="24" height="24">
+        Bills
+    </button>
+    <button class="nav-item">
+        <img src="img/aa4.jpg" alt="Me" width="24" height="24">
+        Me
+    </button>
+</div>
 
 </body>
 </html>
