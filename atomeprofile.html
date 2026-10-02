@@ -151,9 +151,15 @@
                     
                     <!-- Card 1: Atome+ -->
                     <div onclick="openModal('atomePlusModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
-                        <div class="w-10 h-10 rounded-full bg-[#FFF000] flex items-center justify-center shadow-sm mb-2 border border-black/5">
-                            <span class="font-extrabold text-[15px] text-atome-dark tracking-tighter">a+</span>
-                        </div>
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-2 border border-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="20">
+  <!-- White background circle with a bold dark outline -->
+  <circle cx="50" cy="50" r="44" fill="#ffffff" stroke="#111827" stroke-width="8" />
+  
+  <!-- Yellow "a+" text -->
+  <text x="50" y="58" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="46" fill="#FACC15" text-anchor="middle">a+</text>
+</svg>
+</div>
                         <span class="font-bold text-[14px] text-atome-dark leading-tight">Atome+</span>
                         <span class="text-[12px] font-semibold text-atome-muted mt-1">159 points</span>
                     </div>
@@ -162,12 +168,16 @@
                     <div onclick="openModal('messagesModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
                         <div class="w-10 h-10 flex items-center justify-center mb-2">
                             <!-- Yellow Speech Bubble Icon -->
-                            <svg class="w-8 h-8 text-[#FFF000]" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#FFF000" stroke="#171A21" stroke-width="1.5" stroke-linejoin="round"/>
-                                <circle cx="8" cy="10" r="1" fill="#171A21"/>
-                                <circle cx="12" cy="10" r="1" fill="#171A21"/>
-                                <circle cx="16" cy="10" r="1" fill="#171A21"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="20">
+  <!-- White background chat bubble with a bold dark outline and bottom tail -->
+  <path d="M50 12 C28 12 10 28 10 48 C10 59 16 68 25 74 L21 90 L39 82 C42 83 46 84 50 84 C72 84 90 68 90 48 C90 28 72 12 50 12 Z" 
+        fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" />
+  
+  <!-- Three yellow dots -->
+  <circle cx="36" cy="48" r="6" fill="#FACC15" />
+  <circle cx="50" cy="48" r="6" fill="#FACC15" />
+  <circle cx="64" cy="48" r="6" fill="#FACC15" />
+</svg>
                         </div>
                         <span class="font-bold text-[14px] text-atome-dark leading-tight">Messages</span>
                         <div class="flex items-center gap-1 mt-1">
@@ -178,9 +188,9 @@
 
                     <!-- Card 3: Vouchers -->
                     <div onclick="openModal('vouchersModal')" class="bg-white border border-gray-100 rounded-2xl p-3 flex flex-col items-center text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer active-tap transition">
-                        <div class="w-10 h-10 flex items-center justify-center mb-2">
+                        <div class="w-5 h-49 flex items-center justify-center mb-2">
                             <!-- Ticket Icon -->
-                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#171A21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="w-8 h-8" viewBox="0 0 25 24" fill="none" stroke="#171A21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M2 9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V9z"/>
                                 <line x1="9" y1="12" x2="15" y2="12" stroke-dasharray="2 2"/>
                             </svg>
@@ -357,7 +367,7 @@
         <img src="img/aa3.jpg" alt="Bills" width="24" height="24">
         Bills
     </button>
-    <a href="atomeprofile.html" style="text-decoration: none; color: inherit;">
+    <a href="atomeprofilee.html" style="text-decoration: none; color: inherit;">
     <button class="nav-item">
         <img src="img/aa4.jpg" alt="Me" width="24" height="24">
         Me
