@@ -37,7 +37,7 @@
 
         .logo {
             font-size: 26px;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: -0.8px;
             display: flex;
             align-items: center;
@@ -112,14 +112,25 @@
 
         /* 1. Card (Left, tall spanning 2 rows) */
         .card-paylater {
-            background: #151517;
-            grid-column: 1;
-            grid-row: span 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 280px;
-        }
+    background-image: url('img/a2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    grid-column: 1;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keeps header at top, pushes content container down */
+    min-height: 260px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Optional: If you want to push the savings info even closer to the bottom */
+.card-paylater .savings-info {
+    margin-top: 134px; 
+}
 
         .card-paylater h3 {
             font-size: 18px;
@@ -152,7 +163,7 @@
 
         /* 2. Cash (Top Right) */
         .card-cash {
-            background: linear-gradient(to bottom, #00d2ad, rgba(0, 210, 173, 0));
+            background: linear-gradient(to bottom, #00cbaa, rgb(25 237 193));
             grid-column: 2;
             grid-row: 1;
             display: flex;
@@ -183,7 +194,7 @@
 
         /* 3. Savings (Bottom Right) */
         .card-savings {
-            background: #2f65ff;
+            background: linear-gradient(to bottom, #0068cd, rgb(34 174 255));
             grid-column: 2;
             grid-row: 2;
             display: flex;
@@ -365,38 +376,50 @@
                 <div>
                     <div class="card-header-row">
                         <h3>Card</h3>
-                        <span class="arrow-icon">></span>
+                        <span class="arrow-icon">👁</span>
                     </div>
-                    <div class="pay-text">
-                        <p>Pay in</p>
-                        <h2>up to 12 months</h2>
+                    <div class="savings-info">
+                    <div class="label">Availble Spending limit</div>
+                    <div class="amount-row">
+                        <div class="amount">₱10,000.00</div>
+                    </div>
+                    <div class="amount-row">
+                        <div class="deposit-link">Manage > </div>
                     </div>
                 </div>
-                <div class="cards-graphic">
-                    <div style="font-size: 32px; letter-spacing: -12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">💳💳💳</div>
                 </div>
+                
             </div>
 
             <!-- 2. Cash (Top Right) -->
             <div class="card-box card-cash">
-                <div class="card-header-row">
+                <div class="card-savings-top">
                     <h3>Cash</h3>
-                    <span class="arrow-icon">></span>
+                    <span class="eye-icon">👁</span>
                 </div>
-                <p>Register early to secure your spot</p>
-                <div class="cash-graphics">💰</div>
+                <div class="savings-info">
+                    <div class="label">Availble Limit</div>
+                    <div class="amount-row">
+                        <div class="amount">₱4,000.00</div>
+                    </div>
+                    <div class="amount-row">
+                        <div class="deposit-link">Manage > </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 3. Savings (Bottom Right) -->
             <div class="card-box card-savings">
                 <div class="card-savings-top">
                     <h3>Savings</h3>
-                    <span class="eye-icon">👁️</span>
+                    <span class="eye-icon">👁</span>
                 </div>
                 <div class="savings-info">
                     <div class="label">Total Savings</div>
                     <div class="amount-row">
                         <div class="amount">₱0.00</div>
+                    </div>
+                    <div class="amount-row">
                         <div class="deposit-link">Deposit ></div>
                     </div>
                 </div>
