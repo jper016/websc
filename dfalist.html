@@ -1,256 +1,513 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passport Appointment Booking Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 h-full flex flex-col">
 
-    <header class="bg-indigo-900 text-white shadow-md">
+<html lang="en" class="h-full">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passport Appointment Booking Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-slate-50 text-slate-800 h-full flex flex-col antialiased">
+
+
+
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-40">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+
+            <div class="flex items-center space-x-2.5">
+
                 <div class="bg-indigo-700 p-2 rounded-lg">
-                    <i data-lucide="book-open-check" class="w-6 h-6 text-indigo-200"></i>
+
+                    <i data-lucide="book-open-check" class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-200"></i>
+
                 </div>
+
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight">PassportGov Portal</h1>
-                    <p class="text-xs text-indigo-300">Appointment & Payment Management System</p>
+
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight">PassportGov</h1>
+
+                    <p class="text-[10px] sm:text-xs text-indigo-300">Appointment Management</p>
+
                 </div>
+
             </div>
-            <div class="flex items-center space-x-4">
+
+            <div class="flex items-center space-x-3">
+
                 <div class="hidden md:flex items-center space-x-2 text-sm bg-indigo-800 px-3 py-1.5 rounded-full border border-indigo-700">
+
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+
                     <span class="text-indigo-200">System Online</span>
+
                 </div>
-                <div class="flex items-center space-x-2 border-l border-indigo-700 pl-4">
-                    <div class="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center font-semibold text-white shadow">
+
+                <div class="flex items-center space-x-2 border-l border-indigo-700/60 pl-3">
+
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-indigo-600 flex items-center justify-center font-semibold text-xs sm:text-sm text-white shadow">
+
                         AD
+
                     </div>
+
                     <div class="hidden sm:block text-left text-xs">
+
                         <p class="font-medium text-white">Admin Officer</p>
+
                         <p class="text-indigo-300">Consular Branch</p>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </header>
 
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 overflow-y-auto">
-        
-        <!-- Statistics Cards (4 columns layout) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6 overflow-y-auto">
+
+       
+
+        <!-- Statistics Cards -->
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+
             <!-- Total Appointments -->
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-shadow">
+
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Bookings</p>
-                    <h3 id="statTotal" class="text-2xl font-bold text-slate-900 mt-1">0</h3>
-                    <span class="text-xs text-indigo-600 font-medium flex items-center mt-1">
+
+                    <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">Total Bookings</p>
+
+                    <h3 id="statTotal" class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">0</h3>
+
+                    <span class="hidden sm:flex text-xs text-indigo-600 font-medium items-center mt-1">
+
                         <i data-lucide="trending-up" class="w-3.5 h-3.5 mr-1"></i> Active records
+
                     </span>
+
                 </div>
-                <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
-                    <i data-lucide="users" class="w-6 h-6"></i>
+
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shrink-0">
+
+                    <i data-lucide="users" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+
                 </div>
+
             </div>
+
+
 
             <!-- Paid Status -->
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-shadow">
+
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Paid Payments</p>
-                    <h3 id="statPaid" class="text-2xl font-bold text-emerald-600 mt-1">0</h3>
-                    <span class="text-xs text-emerald-600 font-medium flex items-center mt-1">
+
+                    <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">Paid</p>
+
+                    <h3 id="statPaid" class="text-xl sm:text-2xl font-bold text-emerald-600 mt-1">0</h3>
+
+                    <span class="hidden sm:flex text-xs text-emerald-600 font-medium items-center mt-1">
+
                         <i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1"></i> Confirmed fees
+
                     </span>
+
                 </div>
-                <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
-                    <i data-lucide="credit-card" class="w-6 h-6"></i>
+
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 shrink-0">
+
+                    <i data-lucide="credit-card" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+
                 </div>
+
             </div>
+
+
 
             <!-- Failed Status -->
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-shadow">
+
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Failed Payments</p>
-                    <h3 id="statFailed" class="text-2xl font-bold text-rose-600 mt-1">0</h3>
-                    <span class="text-xs text-rose-600 font-medium flex items-center mt-1">
+
+                    <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">Failed</p>
+
+                    <h3 id="statFailed" class="text-xl sm:text-2xl font-bold text-rose-600 mt-1">0</h3>
+
+                    <span class="hidden sm:flex text-xs text-rose-600 font-medium items-center mt-1">
+
                         <i data-lucide="alert-octagon" class="w-3.5 h-3.5 mr-1"></i> Transaction errors
+
                     </span>
+
                 </div>
-                <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600">
-                    <i data-lucide="x-circle" class="w-6 h-6"></i>
+
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 shrink-0">
+
+                    <i data-lucide="x-circle" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+
                 </div>
+
             </div>
+
+
 
             <!-- Upcoming Schedules Today -->
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-shadow">
+
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Upcoming / Today</p>
-                    <h3 id="statToday" class="text-2xl font-bold text-blue-600 mt-1">0</h3>
-                    <span class="text-xs text-blue-600 font-medium flex items-center mt-1">
+
+                    <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">Upcoming</p>
+
+                    <h3 id="statToday" class="text-xl sm:text-2xl font-bold text-blue-600 mt-1">0</h3>
+
+                    <span class="hidden sm:flex text-xs text-blue-600 font-medium items-center mt-1">
+
                         <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1"></i> Scheduled queue
+
                     </span>
+
                 </div>
-                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
-                    <i data-lucide="calendar-days" class="w-6 h-6"></i>
+
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shrink-0">
+
+                    <i data-lucide="calendar-days" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+
                 </div>
+
             </div>
+
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-4">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                
+
+
+        <!-- Search & Control Toolbar -->
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sm:p-5 space-y-3">
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+
+               
+
                 <!-- Search & Filters -->
-                <div class="flex flex-col sm:flex-row items-center w-full md:w-auto gap-3 flex-1">
+
+                <div class="flex flex-col sm:flex-row items-center w-full md:w-auto gap-2 sm:gap-3 flex-1">
+
                     <div class="relative w-full sm:w-80">
+
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+
                             <i data-lucide="search" class="w-4 h-4"></i>
+
                         </span>
-                        <input type="text" id="searchInput" placeholder="Search by name, email or number..." 
-                            class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
+                        <input type="text" id="searchInput" placeholder="Search by name, email or number..."
+
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
                     </div>
 
-                    <div class="flex items-center space-x-2 w-full sm:w-auto">
-                        <select id="filterAppType" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="">All Application Types</option>
+
+
+                    <div class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+
+                        <select id="filterAppType" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+                            <option value="">All Types</option>
+
                             <option value="New">New</option>
+
                             <option value="Renewal">Renewal</option>
+
                             <option value="Replacement">Replacement</option>
+
                         </select>
 
-                        <select id="filterPayment" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="">All Payment Statuses</option>
+
+
+                        <select id="filterPayment" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+                            <option value="">All Statuses</option>
+
                             <option value="Paid">Paid</option>
+
                             <option value="Failed">Failed</option>
+
                         </select>
+
                     </div>
+
                 </div>
+
+
 
                 <!-- Action Buttons -->
-                <div class="flex items-center space-x-3 w-full md:w-auto justify-end">
-                    <button onclick="exportToCSV()" class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-sm rounded-xl shadow-sm transition-all">
-                        <i data-lucide="download" class="w-4 h-4 mr-2"></i> Export CSV
+
+                <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+
+                    <button onclick="exportToCSV()" class="flex-1 sm:flex-none inline-flex items-center justify-center px-3.5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm rounded-xl shadow-sm transition-all">
+
+                        <i data-lucide="download" class="w-4 h-4 mr-1.5"></i> Export
+
                     </button>
-                    <button onclick="openModal()" class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-xl shadow-md shadow-indigo-100 transition-all">
-                        <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i> Add Appointment
+
+                    <button onclick="openModal()" class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs sm:text-sm rounded-xl shadow-md shadow-indigo-100 transition-all">
+
+                        <i data-lucide="user-plus" class="w-4 h-4 mr-1.5"></i>
+
                     </button>
+
                 </div>
+
             </div>
+
         </div>
+
+
+
+        <!-- Data Presentation (Table view for desktops / Card view helper support) -->
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+
+                <table class="w-full text-left border-collapse min-w-[700px]">
+
                     <thead>
+
                         <tr class="bg-slate-50/70 border-b border-slate-100 text-slate-400 font-semibold text-xs uppercase tracking-wider">
-                            <th class="py-4 px-6">Full Name</th>
-                            <th class="py-4 px-6">Gmail / Email</th>
-                            <th class="py-4 px-6">Phone Number</th>
-                            <th class="py-4 px-6">Application Type</th>
-                            <th class="py-4 px-6">Payment Status</th>
-                            <th class="py-4 px-6">Schedule</th>
-                            <th class="py-4 px-6 text-right">Actions</th>
+
+                            <th class="py-4 px-5">Full Name</th>
+
+                            <th class="py-4 px-5">Gmail / Email</th>
+
+                            <th class="py-4 px-5">Phone Number</th>
+
+                            <th class="py-4 px-5">Type</th>
+
+                            <th class="py-4 px-5">Payment</th>
+
+                            <th class="py-4 px-5">Schedule</th>
+
+                            <th class="py-4 px-5 text-right">Actions</th>
+
                         </tr>
+
                     </thead>
+
                     <tbody id="appointmentTableBody" class="divide-y divide-slate-100 text-sm text-slate-600">
+
                         <!-- Populated dynamically via JS -->
+
                     </tbody>
+
                 </table>
+
             </div>
 
+
+
             <!-- Empty State -->
+
             <div id="emptyState" class="hidden flex flex-col items-center justify-center py-16 px-4 text-center">
+
                 <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-4">
+
                     <i data-lucide="folder-search" class="w-8 h-8"></i>
+
                 </div>
+
                 <h3 class="text-base font-bold text-slate-700">No appointments found</h3>
+
                 <p class="text-xs text-slate-400 mt-1 max-w-sm">Try adjusting your search queries or filter attributes, or add a new record to get started.</p>
+
             </div>
+
         </div>
+
+
 
     </main>
 
-    <div id="appointmentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 overflow-hidden border border-slate-100 transform transition-all">
-            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50">
-                <h3 id="modalTitle" class="text-base font-bold text-slate-800 flex items-center">
+
+
+    <!-- Modal Form -->
+
+    <div id="appointmentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-3 sm:p-4 overflow-y-auto">
+
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto overflow-hidden border border-slate-100 transform transition-all my-auto">
+
+            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 bg-slate-50">
+
+                <h3 id="modalTitle" class="text-sm sm:text-base font-bold text-slate-800 flex items-center">
+
                     <i data-lucide="user-plus" class="w-5 h-5 mr-2 text-indigo-600"></i> New Passport Booking
+
                 </h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition-colors p-1">
+
                     <i data-lucide="x" class="w-5 h-5"></i>
+
                 </button>
+
             </div>
-            
-            <form id="appointmentForm" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4">
+
+           
+
+            <form id="appointmentForm" onsubmit="handleFormSubmit(event)" class="p-4 sm:p-6 space-y-3.5">
+
                 <input type="hidden" id="editIndex" value="-1">
-                
+
+               
+
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Full Name</label>
+
+                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Full Name</label>
+
                     <input type="text" id="fullName" required placeholder="e.g. Maria Santos"
-                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Gmail / Email</label>
+
+                        <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Gmail / Email</label>
+
                         <input type="email" id="email" required placeholder="maria@gmail.com"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
                     </div>
+
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Phone Number</label>
+
+                        <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Phone Number</label>
+
                         <input type="text" id="phoneNumber" required placeholder="+63 912 345 6789"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
                     </div>
+
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Application Type</label>
-                        <select id="appType" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+                        <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Application Type</label>
+
+                        <select id="appType" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
                             <option value="New">New</option>
+
                             <option value="Renewal">Renewal</option>
+
                             <option value="Replacement">Replacement</option>
+
                         </select>
+
                     </div>
+
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Payment Status</label>
-                        <select id="paymentStatus" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+                        <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Payment Status</label>
+
+                        <select id="paymentStatus" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
                             <option value="Paid">Paid</option>
+
                             <option value="Failed">Failed</option>
+
                         </select>
+
                     </div>
+
                 </div>
+
+
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Schedule Date & Time</label>
+
+                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Schedule Date & Time</label>
+
                     <input type="datetime-local" id="scheduleDate" required
-                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+
                 </div>
 
-                <div class="pt-4 flex items-center justify-end space-x-3 border-t border-slate-100">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-sm rounded-xl transition-all">
+
+
+                <div class="pt-3 flex items-center justify-end space-x-2.5 border-t border-slate-100">
+
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm rounded-xl transition-all">
+
                         Cancel
+
                     </button>
-                    <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-xl shadow-md shadow-indigo-100 transition-all">
+
+                    <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs sm:text-sm rounded-xl shadow-md shadow-indigo-100 transition-all">
+
                         Save Appointment
+
                     </button>
+
                 </div>
+
             </form>
+
         </div>
+
     </div>
 
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2"></div>
+
+
+    <div id="toastContainer" class="fixed bottom-4 right-4 left-4 sm:left-auto z-50 flex flex-col space-y-2"></div>
+
+
 
     <script>
-        // Initial mock records dataset
+
         let appointments = [
     {
         fullName: "Juan Miguel Santos Dela Cruz",
@@ -258,7 +515,15 @@
         phoneNumber: "+63 917 555 0192",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T09:30"
+        schedule: "2026-10-15T09:30"
+    },
+    {
+        fullName: "Juan Miguel Santos Dela Cruz",
+        email: "juan.delacruz@gmail.com",
+        phoneNumber: "+63 917 555 0192",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T09:30"
     },
     {
         fullName: "Sarah Marie Villanueva Jenkins",
@@ -266,7 +531,7 @@
         phoneNumber: "+63 918 892 3411",
         appType: "New",
         paymentStatus: "Pending",
-        schedule: "2026-06-16T13:00"
+        schedule: "2026-10-16T13:00"
     },
     {
         fullName: "Aiden Cruz Tan",
@@ -274,7 +539,7 @@
         phoneNumber: "+63 922 881 9923",
         appType: "Replacement",
         paymentStatus: "Failed",
-        schedule: "2026-06-14T11:15"
+        schedule: "2026-10-14T11:15"
     },
     {
         fullName: "Beatriz Santos Gomez",
@@ -282,279 +547,7 @@
         phoneNumber: "+63 908 776 5541",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T15:45"
-    },
-    {
-        fullName: "Carlos Garcia Reyes",
-        email: "carlos.reyes@gmail.com",
-        phoneNumber: "+63 918 111 2233",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T08:00"
-    },
-    {
-        fullName: "Chloe Ramos Smith",
-        email: "chloe.smith@gmail.com",
-        phoneNumber: "+63 919 555 0199",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T09:00"
-    },
-    {
-        fullName: "Liam Bautista Johnson",
-        email: "liam.j@gmail.com",
-        phoneNumber: "+63 920 555 0144",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T10:00"
-    },
-    {
-        fullName: "Emma Rose Davis",
-        email: "emma.davis@gmail.com",
-        phoneNumber: "+63 921 794 0911",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T11:00"
-    },
-    {
-        fullName: "Noah Reyes Garcia",
-        email: "noah.garcia@gmail.com",
-        phoneNumber: "+63 919 222 3344",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T13:00"
-    },
-    {
-        fullName: "Olivia Santos Martinez",
-        email: "olivia.m@gmail.com",
-        phoneNumber: "+63 920 333 4455",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T14:00"
-    },
-    {
-        fullName: "Lucas David Rodriguez",
-        email: "lucas.r@gmail.com",
-        phoneNumber: "+63 921 555 0122",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-01T15:00"
-    },
-    {
-        fullName: "Mia Grace Wilson",
-        email: "mia.wilson@gmail.com",
-        phoneNumber: "+63 922 555 0177",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-02T08:30"
-    },
-    {
-        fullName: "Ethan James Anderson",
-        email: "ethan.a@gmail.com",
-        phoneNumber: "+63 921 444 5566",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-02T09:30"
-    },
-    {
-        fullName: "Harper Mae Thomas",
-        email: "harper.t@gmail.com",
-        phoneNumber: "+63 922 555 6677",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-02T10:30"
-    },
-    {
-        fullName: "Mason Lee Taylor",
-        email: "mason.taylor@gmail.com",
-        phoneNumber: "+63 923 794 0123",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-02T13:30"
-    },
-    {
-        fullName: "Evelyn Joy Moore",
-        email: "evelyn.m@gmail.com",
-        phoneNumber: "+63 924 555 0188",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-02T14:30"
-    },
-    {
-        fullName: "Logan Paul Jackson",
-        email: "logan.j@gmail.com",
-        phoneNumber: "+63 923 666 7788",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T08:00"
-    },
-    {
-        fullName: "Abigail Grace Martin",
-        email: "abigail.m@gmail.com",
-        phoneNumber: "+63 924 777 8899",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T09:00"
-    },
-    {
-        fullName: "Alexander John Lee",
-        email: "alexander.lee@gmail.com",
-        phoneNumber: "+63 925 555 0155",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T10:00"
-    },
-    {
-        fullName: "Emily Anne Perez",
-        email: "emily.perez@gmail.com",
-        phoneNumber: "+63 926 555 0166",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T11:00"
-    },
-    {
-        fullName: "James Michael White",
-        email: "james.white@gmail.com",
-        phoneNumber: "+63 925 888 9900",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T13:00"
-    },
-    {
-        fullName: "Elizabeth Marie Harris",
-        email: "elizabeth.h@gmail.com",
-        phoneNumber: "+63 926 999 0011",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-03T14:00"
-    },
-    {
-        fullName: "Benjamin Thomas Clark",
-        email: "benjamin.c@gmail.com",
-        phoneNumber: "+63 927 794 0456",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-04T08:30"
-    },
-    {
-        fullName: "Sofia Nicole Lewis",
-        email: "sofia.lewis@gmail.com",
-        phoneNumber: "+63 928 555 0133",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-04T09:30"
-    },
-    {
-        fullName: "Elijah David Robinson",
-        email: "elijah.r@gmail.com",
-        phoneNumber: "+63 927 101 2020",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-04T10:30"
-    },
-    {
-        fullName: "Avery Rose Walker",
-        email: "avery.walker@gmail.com",
-        phoneNumber: "+63 928 202 3030",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-04T13:30"
-    },
-    {
-        fullName: "Daniel Joseph Young",
-        email: "daniel.young@gmail.com",
-        phoneNumber: "+63 929 555 0111",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-04T14:30"
-    },
-    {
-        fullName: "Ella Grace Allen",
-        email: "ella.allen@gmail.com",
-        phoneNumber: "+63 930 555 0122",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T08:00"
-    },
-    {
-        fullName: "Matthew Ryan King",
-        email: "matthew.king@gmail.com",
-        phoneNumber: "+63 929 303 4040",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T09:00"
-    },
-    {
-        fullName: "Scarlett Jade Wright",
-        email: "scarlett.w@gmail.com",
-        phoneNumber: "+63 930 404 5050",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T10:00"
-    },
-    {
-        fullName: "Henry Louis Scott",
-        email: "henry.scott@gmail.com",
-        phoneNumber: "+63 931 794 0789",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T11:00"
-    },
-    {
-        fullName: "Victoria Claire Torres",
-        email: "victoria.t@gmail.com",
-        phoneNumber: "+63 932 555 0144",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T13:00"
-    },
-    {
-        fullName: "Jackson Cole Nguyen",
-        email: "jackson.n@gmail.com",
-        phoneNumber: "+63 931 505 6060",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-05T14:00"
-    },
-    {
-        fullName: "Grace Elizabeth Hill",
-        email: "grace.hill@gmail.com",
-        phoneNumber: "+63 932 606 7070",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-08T08:30"
-    },
-    {
-        fullName: "Sebastian Mateo Flores",
-        email: "sebastian.f@gmail.com",
-        phoneNumber: "+63 933 555 0188",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-08T09:30"
-    },
-    {
-        fullName: "Chloe Sophia Green",
-        email: "chloe.g@gmail.com",
-        phoneNumber: "+63 934 555 0177",
-        appType: "Renewal",
-        paymentStatus: "Paid",
-        schedule: "2026-06-08T10:30"
-    },
-    {
-        fullName: "Jack Ryan Adams",
-        email: "jack.adams@gmail.com",
-        phoneNumber: "+63 933 707 8080",
-        appType: "Replacement",
-        paymentStatus: "Paid",
-        schedule: "2026-06-08T13:30"
-    },
-    {
-        fullName: "Camila Rose Baker",
-        email: "camila.baker@gmail.com",
-        phoneNumber: "+63 934 808 9090",
-        appType: "New",
-        paymentStatus: "Paid",
-        schedule: "2026-06-08T14:30"
+        schedule: "2026-10-18T15:45"
     },
     {
         fullName: "Aiden Luke Nelson",
@@ -562,7 +555,7 @@
         phoneNumber: "+63 935 794 0321",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T08:00"
+        schedule: "2026-10-09T08:00"
     },
     {
         fullName: "Penelope Jane Carter",
@@ -570,7 +563,7 @@
         phoneNumber: "+63 936 555 0199",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T09:00"
+        schedule: "2026-10-09T09:00"
     },
     {
         fullName: "Owen Tyler Mitchell",
@@ -578,7 +571,7 @@
         phoneNumber: "+63 935 909 0101",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T10:00"
+        schedule: "2026-10-09T10:00"
     },
     {
         fullName: "Riley Nicole Perez",
@@ -586,7 +579,7 @@
         phoneNumber: "+63 936 010 1212",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T11:00"
+        schedule: "2026-10-09T11:00"
     },
     {
         fullName: "Wyatt Alexander Roberts",
@@ -594,7 +587,7 @@
         phoneNumber: "+63 937 555 0133",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T13:00"
+        schedule: "2026-10-09T13:00"
     },
     {
         fullName: "Zoey Marie Turner",
@@ -602,7 +595,7 @@
         phoneNumber: "+63 938 555 0122",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-09T14:00"
+        schedule: "2026-10-09T14:00"
     },
     {
         fullName: "Gabriel Scott Phillips",
@@ -610,7 +603,7 @@
         phoneNumber: "+63 937 121 2323",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-10T08:30"
+        schedule: "2026-10-10T08:30"
     },
     {
         fullName: "Nora Grace Campbell",
@@ -618,7 +611,7 @@
         phoneNumber: "+63 938 232 3434",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-10T09:30"
+        schedule: "2026-10-10T09:30"
     },
     {
         fullName: "Anthony William Parker",
@@ -626,7 +619,7 @@
         phoneNumber: "+63 939 794 0654",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-10T10:30"
+        schedule: "2026-10-10T10:30"
     },
     {
         fullName: "Lily Mae Evans",
@@ -634,7 +627,7 @@
         phoneNumber: "+63 940 555 0188",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-10T13:30"
+        schedule: "2026-10-10T13:30"
     },
     {
         fullName: "Dylan Thomas Edwards",
@@ -642,7 +635,7 @@
         phoneNumber: "+63 939 343 4545",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-10T14:30"
+        schedule: "2026-10-10T14:30"
     },
     {
         fullName: "Hannah Faith Collins",
@@ -650,7 +643,7 @@
         phoneNumber: "+63 940 454 5656",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T08:00"
+        schedule: "2026-10-11T08:00"
     },
     {
         fullName: "Luke Gabriel Stewart",
@@ -658,7 +651,7 @@
         phoneNumber: "+63 941 555 0177",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T09:00"
+        schedule: "2026-10-11T09:00"
     },
     {
         fullName: "Aria Danielle Sanchez",
@@ -666,7 +659,7 @@
         phoneNumber: "+63 942 555 0166",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T10:00"
+        schedule: "2026-10-11T10:00"
     },
     {
         fullName: "Caleb Andrew Morris",
@@ -674,7 +667,7 @@
         phoneNumber: "+63 941 565 6767",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T11:00"
+        schedule: "2026-10-11T11:00"
     },
     {
         fullName: "Stella Marie Rogers",
@@ -682,7 +675,7 @@
         phoneNumber: "+63 942 676 7878",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T13:00"
+        schedule: "2026-10-11T13:00"
     },
     {
         fullName: "Isaac Christopher Reed",
@@ -690,7 +683,7 @@
         phoneNumber: "+63 943 794 0987",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-11T14:00"
+        schedule: "2026-10-11T14:00"
     },
     {
         fullName: "Ellie Nicole Cook",
@@ -698,7 +691,7 @@
         phoneNumber: "+63 944 555 0111",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-12T08:30"
+        schedule: "2026-10-12T08:30"
     },
     {
         fullName: "Nathaniel James Morgan",
@@ -706,7 +699,7 @@
         phoneNumber: "+63 943 787 8989",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-12T09:30"
+        schedule: "2026-10-12T09:30"
     },
     {
         fullName: "Hazel Grace Bell",
@@ -714,7 +707,7 @@
         phoneNumber: "+63 944 898 9090",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-12T10:30"
+        schedule: "2026-10-12T10:30"
     },
     {
         fullName: "Aaron Michael Murphy",
@@ -722,7 +715,7 @@
         phoneNumber: "+63 945 555 0144",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-12T13:30"
+        schedule: "2026-10-12T13:30"
     },
     {
         fullName: "Aurora Skye Bailey",
@@ -730,7 +723,7 @@
         phoneNumber: "+63 946 555 0133",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-12T14:30"
+        schedule: "2026-10-12T14:30"
     },
     {
         fullName: "Christian Paul Rivera",
@@ -738,7 +731,7 @@
         phoneNumber: "+63 945 909 0101",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T08:00"
+        schedule: "2026-10-15T08:00"
     },
     {
         fullName: "Savannah Mae Cooper",
@@ -746,7 +739,7 @@
         phoneNumber: "+63 946 010 1212",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T09:00"
+        schedule: "2026-10-15T09:00"
     },
     {
         fullName: "Hunter Lee Richardson",
@@ -754,7 +747,7 @@
         phoneNumber: "+63 947 794 0112",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T10:00"
+        schedule: "2026-10-15T10:00"
     },
     {
         fullName: "Brooklyn Ann Cox",
@@ -762,7 +755,7 @@
         phoneNumber: "+63 948 555 0155",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T11:00"
+        schedule: "2026-10-15T11:00"
     },
     {
         fullName: "Eli Benjamin Howard",
@@ -770,7 +763,7 @@
         phoneNumber: "+63 947 121 2323",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T13:00"
+        schedule: "2026-10-15T13:00"
     },
     {
         fullName: "Paisley Rose Ward",
@@ -778,7 +771,7 @@
         phoneNumber: "+63 948 232 3434",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-15T14:00"
+        schedule: "2026-10-15T14:00"
     },
     {
         fullName: "Landon Mateo Torres",
@@ -786,7 +779,7 @@
         phoneNumber: "+63 949 555 0199",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-16T08:30"
+        schedule: "2026-10-16T08:30"
     },
     {
         fullName: "Claire Louise Peterson",
@@ -794,7 +787,7 @@
         phoneNumber: "+63 950 555 0188",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-16T09:30"
+        schedule: "2026-10-16T09:30"
     },
     {
         fullName: "Jonathan David Gray",
@@ -802,7 +795,7 @@
         phoneNumber: "+63 949 343 4545",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-16T10:30"
+        schedule: "2026-10-16T10:30"
     },
     {
         fullName: "Skylar Marie Ramirez",
@@ -810,7 +803,7 @@
         phoneNumber: "+63 950 454 5656",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-16T13:30"
+        schedule: "2026-10-16T13:30"
     },
     {
         fullName: "Nolan Alexander James",
@@ -818,7 +811,7 @@
         phoneNumber: "+63 951 794 0223",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-16T14:30"
+        schedule: "2026-10-16T14:30"
     },
     {
         fullName: "Bella Grace Watson",
@@ -826,7 +819,7 @@
         phoneNumber: "+63 952 555 0122",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T08:00"
+        schedule: "2026-10-17T08:00"
     },
     {
         fullName: "Jeremiah Lee Brooks",
@@ -834,7 +827,7 @@
         phoneNumber: "+63 951 565 6767",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T09:00"
+        schedule: "2026-10-17T09:00"
     },
     {
         fullName: "Lucy Mae Kelly",
@@ -842,7 +835,7 @@
         phoneNumber: "+63 952 676 7878",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T10:00"
+        schedule: "2026-10-17T10:00"
     },
     {
         fullName: "Easton Robert Sanders",
@@ -850,7 +843,7 @@
         phoneNumber: "+63 953 555 0133",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T11:00"
+        schedule: "2026-10-17T11:00"
     },
     {
         fullName: "Caroline Faith Price",
@@ -858,7 +851,7 @@
         phoneNumber: "+63 954 555 0144",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T13:00"
+        schedule: "2026-10-17T13:00"
     },
     {
         fullName: "Ezekiel Cole Bennett",
@@ -866,7 +859,7 @@
         phoneNumber: "+63 953 787 8989",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-17T14:00"
+        schedule: "2026-10-17T14:00"
     },
     {
         fullName: "Genesis Joy Wood",
@@ -874,7 +867,7 @@
         phoneNumber: "+63 954 898 9090",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T08:30"
+        schedule: "2026-10-18T08:30"
     },
     {
         fullName: "Miles Thomas Barnes",
@@ -882,7 +875,7 @@
         phoneNumber: "+63 955 794 0334",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T09:30"
+        schedule: "2026-10-18T09:30"
     },
     {
         fullName: "Emilia Rose Ross",
@@ -890,7 +883,7 @@
         phoneNumber: "+63 956 555 0177",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T10:30"
+        schedule: "2026-10-18T10:30"
     },
     {
         fullName: "Greyson Ryan Henderson",
@@ -898,7 +891,7 @@
         phoneNumber: "+63 955 909 0101",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T13:30"
+        schedule: "2026-10-18T13:30"
     },
     {
         fullName: "Kennedy Nicole Coleman",
@@ -906,7 +899,7 @@
         phoneNumber: "+63 956 010 1212",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-18T14:30"
+        schedule: "2026-10-18T14:30"
     },
     {
         fullName: "Jose Miguel Jenkins",
@@ -914,7 +907,7 @@
         phoneNumber: "+63 957 555 0111",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T08:00"
+        schedule: "2026-10-19T08:00"
     },
     {
         fullName: "Allison Marie Perry",
@@ -922,7 +915,7 @@
         phoneNumber: "+63 958 555 0199",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T09:00"
+        schedule: "2026-10-19T09:00"
     },
     {
         fullName: "Axel James Powell",
@@ -930,7 +923,7 @@
         phoneNumber: "+63 957 121 2323",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T10:00"
+        schedule: "2026-10-19T10:00"
     },
     {
         fullName: "Maya Grace Long",
@@ -938,7 +931,7 @@
         phoneNumber: "+63 958 232 3434",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T11:00"
+        schedule: "2026-10-19T11:00"
     },
     {
         fullName: "Carson Daniel Patterson",
@@ -946,7 +939,7 @@
         phoneNumber: "+63 959 794 0445",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T13:00"
+        schedule: "2026-10-19T13:00"
     },
     {
         fullName: "Samantha Jane Hughes",
@@ -954,7 +947,7 @@
         phoneNumber: "+63 960 555 0188",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-19T14:00"
+        schedule: "2026-10-19T14:00"
     },
     {
         fullName: "Maverick Lee Flores",
@@ -962,7 +955,7 @@
         phoneNumber: "+63 959 343 4545",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-22T08:30"
+        schedule: "2026-10-22T08:30"
     },
     {
         fullName: "Elena Grace Washington",
@@ -970,7 +963,7 @@
         phoneNumber: "+63 960 454 5656",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-22T09:30"
+        schedule: "2026-10-22T09:30"
     },
     {
         fullName: "Leonardo Ray Butler",
@@ -978,7 +971,7 @@
         phoneNumber: "+63 961 555 0144",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-22T10:30"
+        schedule: "2026-10-22T10:30"
     },
     {
         fullName: "Naomi Rose Simmons",
@@ -986,7 +979,7 @@
         phoneNumber: "+63 962 555 0155",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-22T13:30"
+        schedule: "2026-10-22T13:30"
     },
     {
         fullName: "Theodore James Foster",
@@ -994,7 +987,7 @@
         phoneNumber: "+63 961 565 6767",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-22T14:30"
+        schedule: "2026-10-22T14:30"
     },
     {
         fullName: "Sarah Marie Gonzales",
@@ -1002,7 +995,7 @@
         phoneNumber: "+63 962 676 7878",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T08:00"
+        schedule: "2026-10-23T08:00"
     },
     {
         fullName: "Everett John Bryant",
@@ -1010,7 +1003,7 @@
         phoneNumber: "+63 963 794 0556",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T09:00"
+        schedule: "2026-10-23T09:00"
     },
     {
         fullName: "Sadie Mae Alexander",
@@ -1018,7 +1011,7 @@
         phoneNumber: "+63 964 555 0133",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T10:00"
+        schedule: "2026-10-23T10:00"
     },
     {
         fullName: "Kaden Paul Russell",
@@ -1026,7 +1019,7 @@
         phoneNumber: "+63 963 787 8989",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T11:00"
+        schedule: "2026-10-23T11:00"
     },
     {
         fullName: "Piper Ann Griffin",
@@ -1034,7 +1027,7 @@
         phoneNumber: "+63 964 898 9090",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T13:00"
+        schedule: "2026-10-23T13:00"
     },
     {
         fullName: "Lincoln Scott Diaz",
@@ -1042,7 +1035,7 @@
         phoneNumber: "+63 965 555 0166",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-23T14:00"
+        schedule: "2026-10-23T14:00"
     },
     {
         fullName: "Alice Faye Hayes",
@@ -1050,7 +1043,7 @@
         phoneNumber: "+63 966 555 0177",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-24T08:30"
+        schedule: "2026-10-24T08:30"
     },
     {
         fullName: "Mateo David Myers",
@@ -1058,7 +1051,7 @@
         phoneNumber: "+63 965 909 0101",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-24T09:30"
+        schedule: "2026-10-24T09:30"
     },
     {
         fullName: "Clara Louise Ford",
@@ -1066,7 +1059,7 @@
         phoneNumber: "+63 966 010 1212",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-24T10:30"
+        schedule: "2026-10-24T10:30"
     },
     {
         fullName: "Asher James Hamilton",
@@ -1074,7 +1067,7 @@
         phoneNumber: "+63 967 794 0667",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-24T13:30"
+        schedule: "2026-10-24T13:30"
     },
     {
         fullName: "Julia Grace Graham",
@@ -1082,7 +1075,7 @@
         phoneNumber: "+63 968 555 0122",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-24T14:30"
+        schedule: "2026-10-24T14:30"
     },
     {
         fullName: "Leo Thomas Sullivan",
@@ -1090,7 +1083,7 @@
         phoneNumber: "+63 967 121 2323",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T08:00"
+        schedule: "2026-10-25T08:00"
     },
     {
         fullName: "Sophie Rose Wallace",
@@ -1098,7 +1091,7 @@
         phoneNumber: "+63 968 232 3434",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T09:00"
+        schedule: "2026-10-25T09:00"
     },
     {
         fullName: "Julian Michael Woods",
@@ -1106,7 +1099,7 @@
         phoneNumber: "+63 969 555 0155",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T10:00"
+        schedule: "2026-10-25T10:00"
     },
     {
         fullName: "Ruby Mae Cole",
@@ -1114,7 +1107,7 @@
         phoneNumber: "+63 970 555 0144",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T11:00"
+        schedule: "2026-10-25T11:00"
     },
     {
         fullName: "Hudson Lee West",
@@ -1122,7 +1115,7 @@
         phoneNumber: "+63 969 343 4545",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T13:00"
+        schedule: "2026-10-25T13:00"
     },
     {
         fullName: "Ivy Nicole Jordan",
@@ -1130,7 +1123,7 @@
         phoneNumber: "+63 970 454 5656",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-25T14:00"
+        schedule: "2026-10-25T14:00"
     },
     {
         fullName: "Ezra Ray Owens",
@@ -1138,7 +1131,7 @@
         phoneNumber: "+63 971 794 0778",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-26T08:30"
+        schedule: "2026-10-26T08:30"
     },
     {
         fullName: "Penelope Jane Reynolds",
@@ -1146,7 +1139,7 @@
         phoneNumber: "+63 972 555 0111",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-26T09:30"
+        schedule: "2026-10-26T09:30"
     },
     {
         fullName: "Connor Joseph Fisher",
@@ -1154,7 +1147,7 @@
         phoneNumber: "+63 971 565 6767",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-26T10:30"
+        schedule: "2026-10-26T10:30"
     },
     {
         fullName: "Gianna Marie Ellis",
@@ -1162,7 +1155,7 @@
         phoneNumber: "+63 972 676 7878",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-26T13:30"
+        schedule: "2026-10-26T13:30"
     },
     {
         fullName: "Miles Harrison Vance",
@@ -1170,7 +1163,7 @@
         phoneNumber: "+63 973 555 0122",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-26T14:30"
+        schedule: "2026-10-26T14:30"
     },
     {
         fullName: "Luna Belle Gibson",
@@ -1178,7 +1171,7 @@
         phoneNumber: "+63 974 555 0199",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T08:00"
+        schedule: "2026-10-29T08:00"
     },
     {
         fullName: "Christopher Mark McDonald",
@@ -1186,7 +1179,7 @@
         phoneNumber: "+63 973 787 8989",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T09:00"
+        schedule: "2026-10-29T09:00"
     },
     {
         fullName: "Penelope Ann Cruz",
@@ -1194,7 +1187,7 @@
         phoneNumber: "+63 974 898 9090",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T10:00"
+        schedule: "2026-10-29T10:00"
     },
     {
         fullName: "Jaxon Lee Marshall",
@@ -1202,7 +1195,7 @@
         phoneNumber: "+63 975 794 0889",
         appType: "New",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T11:00"
+        schedule: "2026-10-29T11:00"
     },
     {
         fullName: "Layla Grace Ortiz",
@@ -1210,7 +1203,7 @@
         phoneNumber: "+63 976 555 0155",
         appType: "Renewal",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T13:00"
+        schedule: "2026-10-29T13:00"
     },
     {
         fullName: "Charles David Gomez",
@@ -1218,7 +1211,7 @@
         phoneNumber: "+63 975 909 0101",
         appType: "Replacement",
         paymentStatus: "Paid",
-        schedule: "2026-06-29T14:00"
+        schedule: "2026-10-29T14:00"
     },
     {
         fullName: "Zoe Nicole Murray",
@@ -1226,7 +1219,7 @@
         phoneNumber: "+63 976 010 1212",
         appType: "New",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T08:30"
+        schedule: "2026-10-30T08:30"
     },
     {
         fullName: "Thomas Edward Freeman",
@@ -1234,7 +1227,7 @@
         phoneNumber: "+63 977 555 0188",
         appType: "Renewal",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T09:30"
+        schedule: "2026-10-30T09:30"
     },
     {
         fullName: "Leah Mae Wells",
@@ -1242,7 +1235,7 @@
         phoneNumber: "+63 978 555 0133",
         appType: "Replacement",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T10:30"
+        schedule: "2026-10-30T10:30"
     },
     {
         fullName: "Robert James Webb",
@@ -1250,7 +1243,7 @@
         phoneNumber: "+63 977 121 2323",
         appType: "New",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T11:30"
+        schedule: "2026-10-30T11:30"
     },
     {
         fullName: "Hazel Marie Simpson",
@@ -1258,7 +1251,7 @@
         phoneNumber: "+63 978 232 3434",
         appType: "Renewal",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T13:30"
+        schedule: "2026-10-30T13:30"
     },
     {
         fullName: "David Alan Stevens",
@@ -1266,308 +1259,1716 @@
         phoneNumber: "+63 979 794 0990",
         appType: "Replacement",
         paymentStatus: "Failed",
-        schedule: "2026-06-30T14:30"
+        schedule: "2026-10-30T14:30"
+    },
+    // --- 50 NEWLY ADDED RECORDS (45 Paid, 5 Failed, Oct 9-30) ---
+    {
+        fullName: "Aaron Paul Brooks",
+        email: "aaron.brooks@gmail.com",
+        phoneNumber: "+63 912 345 6781",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-09T08:00"
+    },
+    {
+        fullName: "Brenda Sue Clark",
+        email: "brenda.clark@gmail.com",
+        phoneNumber: "+63 912 345 6782",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-09T09:00"
+    },
+    {
+        fullName: "Charles Edward Davis",
+        email: "charles.davis@gmail.com",
+        phoneNumber: "+63 912 345 6783",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-09T10:00"
+    },
+    {
+        fullName: "Diana Lynn Evans",
+        email: "diana.evans@gmail.com",
+        phoneNumber: "+63 912 345 6784",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-09T11:00"
+    },
+    {
+        fullName: "Edward Frank Green",
+        email: "edward.green@gmail.com",
+        phoneNumber: "+63 912 345 6785",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T08:00"
+    },
+    {
+        fullName: "Fiona Gail Harris",
+        email: "fiona.harris@gmail.com",
+        phoneNumber: "+63 912 345 6786",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T09:00"
+    },
+    {
+        fullName: "George Henry Irwin",
+        email: "george.irwin@gmail.com",
+        phoneNumber: "+63 912 345 6787",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T10:00"
+    },
+    {
+        fullName: "Helen Irene Jones",
+        email: "helen.jones@gmail.com",
+        phoneNumber: "+63 912 345 6788",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T08:00"
+    },
+    {
+        fullName: "Ian Jack King",
+        email: "ian.king@gmail.com",
+        phoneNumber: "+63 912 345 6789",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T09:00"
+    },
+    {
+        fullName: "Julia Karen Lee",
+        email: "julia.lee@gmail.com",
+        phoneNumber: "+63 912 345 6790",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T10:00"
+    },
+    {
+        fullName: "Kevin Larry Miller",
+        email: "kevin.miller@gmail.com",
+        phoneNumber: "+63 913 345 6781",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-13T08:00"
+    },
+    {
+        fullName: "Laura Marie Nelson",
+        email: "laura.nelson@gmail.com",
+        phoneNumber: "+63 913 345 6782",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-13T09:00"
+    },
+    {
+        fullName: "Michael Owen Parker",
+        email: "michael.parker@gmail.com",
+        phoneNumber: "+63 913 345 6783",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-13T10:00"
+    },
+    {
+        fullName: "Nancy Pat Quinn",
+        email: "nancy.quinn@gmail.com",
+        phoneNumber: "+63 913 345 6784",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-14T08:00"
+    },
+    {
+        fullName: "Oscar Ray Roberts",
+        email: "oscar.roberts@gmail.com",
+        phoneNumber: "+63 913 345 6785",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-14T09:00"
+    },
+    {
+        fullName: "Pamela Sue Smith",
+        email: "pamela.smith@gmail.com",
+        phoneNumber: "+63 913 345 6786",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-14T10:00"
+    },
+    {
+        fullName: "Quentin Tom Taylor",
+        email: "quentin.taylor@gmail.com",
+        phoneNumber: "+63 913 345 6787",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T08:00"
+    },
+    {
+        fullName: "Rachel Una Vance",
+        email: "rachel.vance@gmail.com",
+        phoneNumber: "+63 913 345 6788",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T09:00"
+    },
+    {
+        fullName: "Samuel Victor White",
+        email: "samuel.white@gmail.com",
+        phoneNumber: "+63 913 345 6789",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T10:00"
+    },
+    {
+        fullName: "Tina Wendy Young",
+        email: "tina.young@gmail.com",
+        phoneNumber: "+63 913 345 6790",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T08:00"
+    },
+    {
+        fullName: "Ulysses X. Adams",
+        email: "ulysses.adams@gmail.com",
+        phoneNumber: "+63 914 345 6781",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T09:00"
+    },
+    {
+        fullName: "Vera Y. Baker",
+        email: "vera.baker@gmail.com",
+        phoneNumber: "+63 914 345 6782",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T10:00"
+    },
+    {
+        fullName: "Walter Z. Carter",
+        email: "walter.carter@gmail.com",
+        phoneNumber: "+63 914 345 6783",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T08:00"
+    },
+    {
+        fullName: "Xena A. Davis",
+        email: "xena.davis@gmail.com",
+        phoneNumber: "+63 914 345 6784",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T09:00"
+    },
+    {
+        fullName: "Yara B. Evans",
+        email: "yara.evans@gmail.com",
+        phoneNumber: "+63 914 345 6785",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T10:00"
+    },
+    {
+        fullName: "Zachary C. Foster",
+        email: "zachary.foster@gmail.com",
+        phoneNumber: "+63 914 345 6786",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-20T08:00"
+    },
+    {
+        fullName: "Amber D. Garcia",
+        email: "amber.garcia@gmail.com",
+        phoneNumber: "+63 914 345 6787",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-20T09:00"
+    },
+    {
+        fullName: "Blake E. Harris",
+        email: "blake.harris@gmail.com",
+        phoneNumber: "+63 914 345 6788",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-20T10:00"
+    },
+    {
+        fullName: "Cynthia F. Irving",
+        email: "cynthia.irving@gmail.com",
+        phoneNumber: "+63 914 345 6789",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-21T08:00"
+    },
+    {
+        fullName: "Derek G. Jones",
+        email: "derek.jones@gmail.com",
+        phoneNumber: "+63 914 345 6790",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-21T09:00"
+    },
+    {
+        fullName: "Erica H. Klein",
+        email: "erica.klein@gmail.com",
+        phoneNumber: "+63 915 345 6781",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-21T10:00"
+    },
+    {
+        fullName: "Felix I. Lopez",
+        email: "felix.lopez@gmail.com",
+        phoneNumber: "+63 915 345 6782",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T08:00"
+    },
+    {
+        fullName: "Gina J. Miller",
+        email: "gina.miller@gmail.com",
+        phoneNumber: "+63 915 345 6783",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T09:00"
+    },
+    {
+        fullName: "Harold K. Nash",
+        email: "harold.nash@gmail.com",
+        phoneNumber: "+63 915 345 6784",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T10:00"
+    },
+    {
+        fullName: "Iris L. Owens",
+        email: "iris.owens@gmail.com",
+        phoneNumber: "+63 915 345 6785",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T08:00"
+    },
+    {
+        fullName: "Jason M. Peters",
+        email: "jason.peters@gmail.com",
+        phoneNumber: "+63 915 345 6786",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T09:00"
+    },
+    {
+        fullName: "Kara N. Quinn",
+        email: "kara.quinn@gmail.com",
+        phoneNumber: "+63 915 345 6787",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T10:00"
+    },
+    {
+        fullName: "Liam O. Ramos",
+        email: "liam.ramos@gmail.com",
+        phoneNumber: "+63 915 345 6788",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T08:00"
+    },
+    {
+        fullName: "Mona P. Scott",
+        email: "mona.scott@gmail.com",
+        phoneNumber: "+63 915 345 6789",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T09:00"
+    },
+    {
+        fullName: "Nigel Q. Thomas",
+        email: "nigel.thomas@gmail.com",
+        phoneNumber: "+63 915 345 6790",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T10:00"
+    },
+    {
+        fullName: "Olga R. Underwood",
+        email: "olga.underwood@gmail.com",
+        phoneNumber: "+63 916 345 6781",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-27T08:00"
+    },
+    {
+        fullName: "Peter S. Vance",
+        email: "peter.vance@gmail.com",
+        phoneNumber: "+63 916 345 6782",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-27T09:00"
+    },
+    {
+        fullName: "Queenie T. Walsh",
+        email: "queenie.walsh@gmail.com",
+        phoneNumber: "+63 916 345 6783",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-27T10:00"
+    },
+    {
+        fullName: "Russell U. Xavier",
+        email: "russell.xavier@gmail.com",
+        phoneNumber: "+63 916 345 6784",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-28T08:00"
+    },
+    {
+        fullName: "Sylvia V. Yates",
+        email: "sylvia.yates@gmail.com",
+        phoneNumber: "+63 916 345 6785",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-28T09:00"
+    },
+    {
+        fullName: "Travis W. Zane",
+        email: "travis.zane@gmail.com",
+        phoneNumber: "+63 916 345 6786",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-28T10:00"
+    },
+    {
+        fullName: "Ursula X. Abbott",
+        email: "ursula.abbott@gmail.com",
+        phoneNumber: "+63 916 345 6787",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-29T08:00"
+    },
+    {
+        fullName: "Victor Y. Bowen",
+        email: "victor.bowen@gmail.com",
+        phoneNumber: "+63 916 345 6788",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-29T09:00"
+    },
+    {
+        fullName: "Wendy Z. Chase",
+        email: "wendy.chase@gmail.com",
+        phoneNumber: "+63 916 345 6789",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T08:00"
+    },
+    {
+        fullName: "Xavier A. Dixon",
+        email: "xavier.dixon@gmail.com",
+        phoneNumber: "+63 916 345 6790",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T09:00"
+    },
+    {
+        fullName: "Sarah Marie Villanueva Jenkins",
+        email: "s.jenkins@gmail.com",
+        phoneNumber: "+63 918 892 3411",
+        appType: "New",
+        paymentStatus: "Pending",
+        schedule: "2026-10-16T13:00"
+    },
+    {
+        fullName: "Aiden Cruz Tan",
+        email: "aiden.tan99@gmail.com",
+        phoneNumber: "+63 922 881 9923",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-14T11:15"
+    },
+    {
+        fullName: "Beatriz Santos Gomez",
+        email: "bea.gomez@gmail.com",
+        phoneNumber: "+63 908 776 5541",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-18T15:45"
+    },
+    {
+        fullName: "Aiden Luke Nelson",
+        email: "aiden.n@gmail.com",
+        phoneNumber: "+63 935 794 0321",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T08:00"
+    },
+    {
+        fullName: "Penelope Jane Carter",
+        email: "penelope.c@gmail.com",
+        phoneNumber: "+63 936 555 0199",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T09:00"
+    },
+    {
+        fullName: "Owen Tyler Mitchell",
+        email: "owen.mitchell@gmail.com",
+        phoneNumber: "+63 935 909 0101",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T10:00"
+    },
+    {
+        fullName: "Riley Nicole Perez",
+        email: "riley.p@gmail.com",
+        phoneNumber: "+63 936 010 1212",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T11:00"
+    },
+    {
+        fullName: "Wyatt Alexander Roberts",
+        email: "wyatt.roberts@gmail.com",
+        phoneNumber: "+63 937 555 0133",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T13:00"
+    },
+    {
+        fullName: "Zoey Marie Turner",
+        email: "zoey.turner@gmail.com",
+        phoneNumber: "+63 938 555 0122",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-09T14:00"
+    },
+    {
+        fullName: "Gabriel Scott Phillips",
+        email: "gabriel.p@gmail.com",
+        phoneNumber: "+63 937 121 2323",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T08:30"
+    },
+    {
+        fullName: "Nora Grace Campbell",
+        email: "nora.campbell@gmail.com",
+        phoneNumber: "+63 938 232 3434",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-10T09:30"
+    },
+    {
+        fullName: "Anthony William Parker",
+        email: "anthony.p@gmail.com",
+        phoneNumber: "+63 939 794 0654",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T10:30"
+    },
+    {
+        fullName: "Lily Mae Evans",
+        email: "lily.evans@gmail.com",
+        phoneNumber: "+63 940 555 0188",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T13:30"
+    },
+    {
+        fullName: "Dylan Thomas Edwards",
+        email: "dylan.edwards@gmail.com",
+        phoneNumber: "+63 939 343 4545",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-10T14:30"
+    },
+    {
+        fullName: "Hannah Faith Collins",
+        email: "hannah.c@gmail.com",
+        phoneNumber: "+63 940 454 5656",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T08:00"
+    },
+    {
+        fullName: "Luke Gabriel Stewart",
+        email: "luke.stewart@gmail.com",
+        phoneNumber: "+63 941 555 0177",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T09:00"
+    },
+    {
+        fullName: "Aria Danielle Sanchez",
+        email: "aria.sanchez@gmail.com",
+        phoneNumber: "+63 942 555 0166",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T10:00"
+    },
+    {
+        fullName: "Caleb Andrew Morris",
+        email: "caleb.morris@gmail.com",
+        phoneNumber: "+63 941 565 6767",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T11:00"
+    },
+    {
+        fullName: "Stella Marie Rogers",
+        email: "stella.rogers@gmail.com",
+        phoneNumber: "+63 942 676 7878",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T13:00"
+    },
+    {
+        fullName: "Isaac Christopher Reed",
+        email: "isaac.reed@gmail.com",
+        phoneNumber: "+63 943 794 0987",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-11T14:00"
+    },
+    {
+        fullName: "Ellie Nicole Cook",
+        email: "ellie.cook@gmail.com",
+        phoneNumber: "+63 944 555 0111",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T08:30"
+    },
+    {
+        fullName: "Nathaniel James Morgan",
+        email: "nathan.morgan@gmail.com",
+        phoneNumber: "+63 943 787 8989",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T09:30"
+    },
+    {
+        fullName: "Hazel Grace Bell",
+        email: "hazel.bell@gmail.com",
+        phoneNumber: "+63 944 898 9090",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T10:30"
+    },
+    {
+        fullName: "Aaron Michael Murphy",
+        email: "aaron.murphy@gmail.com",
+        phoneNumber: "+63 945 555 0144",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T13:30"
+    },
+    {
+        fullName: "Aurora Skye Bailey",
+        email: "aurora.bailey@gmail.com",
+        phoneNumber: "+63 946 555 0133",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-12T14:30"
+    },
+    {
+        fullName: "Christian Paul Rivera",
+        email: "christian.r@gmail.com",
+        phoneNumber: "+63 945 909 0101",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T08:00"
+    },
+    {
+        fullName: "Savannah Mae Cooper",
+        email: "savannah.c@gmail.com",
+        phoneNumber: "+63 946 010 1212",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T09:00"
+    },
+    {
+        fullName: "Hunter Lee Richardson",
+        email: "hunter.r@gmail.com",
+        phoneNumber: "+63 947 794 0112",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T10:00"
+    },
+    {
+        fullName: "Brooklyn Ann Cox",
+        email: "brooklyn.cox@gmail.com",
+        phoneNumber: "+63 948 555 0155",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T11:00"
+    },
+    {
+        fullName: "Eli Benjamin Howard",
+        email: "eli.howard@gmail.com",
+        phoneNumber: "+63 947 121 2323",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T13:00"
+    },
+    {
+        fullName: "Paisley Rose Ward",
+        email: "paisley.ward@gmail.com",
+        phoneNumber: "+63 948 232 3434",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-15T14:00"
+    },
+    {
+        fullName: "Landon Mateo Torres",
+        email: "landon.torres@gmail.com",
+        phoneNumber: "+63 949 555 0199",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T08:30"
+    },
+    {
+        fullName: "Claire Louise Peterson",
+        email: "claire.p@gmail.com",
+        phoneNumber: "+63 950 555 0188",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T09:30"
+    },
+    {
+        fullName: "Jonathan David Gray",
+        email: "jonathan.gray@gmail.com",
+        phoneNumber: "+63 949 343 4545",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T10:30"
+    },
+    {
+        fullName: "Skylar Marie Ramirez",
+        email: "skylar.ramirez@gmail.com",
+        phoneNumber: "+63 950 454 5656",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T13:30"
+    },
+    {
+        fullName: "Nolan Alexander James",
+        email: "nolan.james@gmail.com",
+        phoneNumber: "+63 951 794 0223",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-16T14:30"
+    },
+    {
+        fullName: "Bella Grace Watson",
+        email: "bella.watson@gmail.com",
+        phoneNumber: "+63 952 555 0122",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T08:00"
+    },
+    {
+        fullName: "Jeremiah Lee Brooks",
+        email: "jeremiah.b@gmail.com",
+        phoneNumber: "+63 951 565 6767",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T09:00"
+    },
+    {
+        fullName: "Lucy Mae Kelly",
+        email: "lucy.kelly@gmail.com",
+        phoneNumber: "+63 952 676 7878",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T10:00"
+    },
+    {
+        fullName: "Easton Robert Sanders",
+        email: "easton.sanders@gmail.com",
+        phoneNumber: "+63 953 555 0133",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T11:00"
+    },
+    {
+        fullName: "Caroline Faith Price",
+        email: "caroline.p@gmail.com",
+        phoneNumber: "+63 954 555 0144",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T13:00"
+    },
+    {
+        fullName: "Ezekiel Cole Bennett",
+        email: "ezekiel.b@gmail.com",
+        phoneNumber: "+63 953 787 8989",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-17T14:00"
+    },
+    {
+        fullName: "Genesis Joy Wood",
+        email: "genesis.wood@gmail.com",
+        phoneNumber: "+63 954 898 9090",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-18T08:30"
+    },
+    {
+        fullName: "Miles Thomas Barnes",
+        email: "miles.barnes@gmail.com",
+        phoneNumber: "+63 955 794 0334",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-18T09:30"
+    },
+    {
+        fullName: "Emilia Rose Ross",
+        email: "emilia.ross@gmail.com",
+        phoneNumber: "+63 956 555 0177",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-18T10:30"
+    },
+    {
+        fullName: "Greyson Ryan Henderson",
+        email: "greyson.h@gmail.com",
+        phoneNumber: "+63 955 909 0101",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-18T13:30"
+    },
+    {
+        fullName: "Kennedy Nicole Coleman",
+        email: "kennedy.c@gmail.com",
+        phoneNumber: "+63 956 010 1212",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-18T14:30"
+    },
+    {
+        fullName: "Jose Miguel Jenkins",
+        email: "jose.jenkins@gmail.com",
+        phoneNumber: "+63 957 555 0111",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T08:00"
+    },
+    {
+        fullName: "Allison Marie Perry",
+        email: "allison.perry@gmail.com",
+        phoneNumber: "+63 958 555 0199",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T09:00"
+    },
+    {
+        fullName: "Axel James Powell",
+        email: "axel.powell@gmail.com",
+        phoneNumber: "+63 957 121 2323",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T10:00"
+    },
+    {
+        fullName: "Maya Grace Long",
+        email: "maya.long@gmail.com",
+        phoneNumber: "+63 958 232 3434",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T11:00"
+    },
+    {
+        fullName: "Carson Daniel Patterson",
+        email: "carson.p@gmail.com",
+        phoneNumber: "+63 959 794 0445",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T13:00"
+    },
+    {
+        fullName: "Samantha Jane Hughes",
+        email: "samantha.h@gmail.com",
+        phoneNumber: "+63 960 555 0188",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-19T14:00"
+    },
+    {
+        fullName: "Maverick Lee Flores",
+        email: "maverick.f@gmail.com",
+        phoneNumber: "+63 959 343 4545",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T08:30"
+    },
+    {
+        fullName: "Elena Grace Washington",
+        email: "elena.w@gmail.com",
+        phoneNumber: "+63 960 454 5656",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T09:30"
+    },
+    {
+        fullName: "Leonardo Ray Butler",
+        email: "leonardo.b@gmail.com",
+        phoneNumber: "+63 961 555 0144",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T10:30"
+    },
+    {
+        fullName: "Naomi Rose Simmons",
+        email: "naomi.simmons@gmail.com",
+        phoneNumber: "+63 962 555 0155",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T13:30"
+    },
+    {
+        fullName: "Theodore James Foster",
+        email: "theodore.f@gmail.com",
+        phoneNumber: "+63 961 565 6767",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-22T14:30"
+    },
+    {
+        fullName: "Sarah Marie Gonzales",
+        email: "sarah.gonzales@gmail.com",
+        phoneNumber: "+63 962 676 7878",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T08:00"
+    },
+    {
+        fullName: "Everett John Bryant",
+        email: "everett.b@gmail.com",
+        phoneNumber: "+63 963 794 0556",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T09:00"
+    },
+    {
+        fullName: "Sadie Mae Alexander",
+        email: "sadie.a@gmail.com",
+        phoneNumber: "+63 964 555 0133",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T10:00"
+    },
+    {
+        fullName: "Kaden Paul Russell",
+        email: "kaden.russell@gmail.com",
+        phoneNumber: "+63 963 787 8989",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T11:00"
+    },
+    {
+        fullName: "Piper Ann Griffin",
+        email: "piper.griffin@gmail.com",
+        phoneNumber: "+63 964 898 9090",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T13:00"
+    },
+    {
+        fullName: "Lincoln Scott Diaz",
+        email: "lincoln.diaz@gmail.com",
+        phoneNumber: "+63 965 555 0166",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-23T14:00"
+    },
+    {
+        fullName: "Alice Faye Hayes",
+        email: "alice.hayes@gmail.com",
+        phoneNumber: "+63 966 555 0177",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-24T08:30"
+    },
+    {
+        fullName: "Mateo David Myers",
+        email: "mateo.myers@gmail.com",
+        phoneNumber: "+63 965 909 0101",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-24T09:30"
+    },
+    {
+        fullName: "Clara Louise Ford",
+        email: "clara.ford@gmail.com",
+        phoneNumber: "+63 966 010 1212",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-24T10:30"
+    },
+    {
+        fullName: "Asher James Hamilton",
+        email: "asher.h@gmail.com",
+        phoneNumber: "+63 967 794 0667",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-24T13:30"
+    },
+    {
+        fullName: "Julia Grace Graham",
+        email: "julia.graham@gmail.com",
+        phoneNumber: "+63 968 555 0122",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-24T14:30"
+    },
+    {
+        fullName: "Leo Thomas Sullivan",
+        email: "leo.sullivan@gmail.com",
+        phoneNumber: "+63 967 121 2323",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T08:00"
+    },
+    {
+        fullName: "Sophie Rose Wallace",
+        email: "sophie.wallace@gmail.com",
+        phoneNumber: "+63 968 232 3434",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T09:00"
+    },
+    {
+        fullName: "Julian Michael Woods",
+        email: "julian.woods@gmail.com",
+        phoneNumber: "+63 969 555 0155",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T10:00"
+    },
+    {
+        fullName: "Ruby Mae Cole",
+        email: "ruby.cole@gmail.com",
+        phoneNumber: "+63 970 555 0144",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T11:00"
+    },
+    {
+        fullName: "Hudson Lee West",
+        email: "hudson.west@gmail.com",
+        phoneNumber: "+63 969 343 4545",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T13:00"
+    },
+    {
+        fullName: "Ivy Nicole Jordan",
+        email: "ivy.jordan@gmail.com",
+        phoneNumber: "+63 970 454 5656",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-25T14:00"
+    },
+    {
+        fullName: "Ezra Ray Owens",
+        email: "ezra.owens@gmail.com",
+        phoneNumber: "+63 971 794 0778",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T08:30"
+    },
+    {
+        fullName: "Penelope Jane Reynolds",
+        email: "penelope.r@gmail.com",
+        phoneNumber: "+63 972 555 0111",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T09:30"
+    },
+    {
+        fullName: "Connor Joseph Fisher",
+        email: "connor.fisher@gmail.com",
+        phoneNumber: "+63 971 565 6767",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T10:30"
+    },
+    {
+        fullName: "Gianna Marie Ellis",
+        email: "gianna.ellis@gmail.com",
+        phoneNumber: "+63 972 676 7878",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T13:30"
+    },
+    {
+        fullName: "Miles Harrison Vance",
+        email: "miles.harrison@gmail.com",
+        phoneNumber: "+63 973 555 0122",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-26T14:30"
+    },
+    {
+        fullName: "Luna Belle Gibson",
+        email: "luna.gibson@gmail.com",
+        phoneNumber: "+63 974 555 0199",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T08:00"
+    },
+    {
+        fullName: "Christopher Mark McDonald",
+        email: "christopher.m@gmail.com",
+        phoneNumber: "+63 973 787 8989",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T09:00"
+    },
+    {
+        fullName: "Penelope Ann Cruz",
+        email: "penelope.cruz@gmail.com",
+        phoneNumber: "+63 974 898 9090",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T10:00"
+    },
+    {
+        fullName: "Jaxon Lee Marshall",
+        email: "jaxon.marshall@gmail.com",
+        phoneNumber: "+63 975 794 0889",
+        appType: "New",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T11:00"
+    },
+    {
+        fullName: "Layla Grace Ortiz",
+        email: "layla.ortiz@gmail.com",
+        phoneNumber: "+63 976 555 0155",
+        appType: "Renewal",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T13:00"
+    },
+    {
+        fullName: "Charles David Gomez",
+        email: "charles.gomez@gmail.com",
+        phoneNumber: "+63 975 909 0101",
+        appType: "Replacement",
+        paymentStatus: "Paid",
+        schedule: "2026-10-29T14:00"
+    },
+    {
+        fullName: "Zoe Nicole Murray",
+        email: "zoe.murray@gmail.com",
+        phoneNumber: "+63 976 010 1212",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T08:30"
+    },
+    {
+        fullName: "Thomas Edward Freeman",
+        email: "thomas.freeman@gmail.com",
+        phoneNumber: "+63 977 555 0188",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T09:30"
+    },
+    {
+        fullName: "Leah Mae Wells",
+        email: "leah.wells@gmail.com",
+        phoneNumber: "+63 978 555 0133",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T10:30"
+    },
+    {
+        fullName: "Robert James Webb",
+        email: "robert.webb@gmail.com",
+        phoneNumber: "+63 977 121 2323",
+        appType: "New",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T11:30"
+    },
+    {
+        fullName: "Hazel Marie Simpson",
+        email: "hazel.simpson@gmail.com",
+        phoneNumber: "+63 978 232 3434",
+        appType: "Renewal",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T13:30"
+    },
+    
+    {
+        fullName: "David Alan Stevens",
+        email: "david.stevens@gmail.com",
+        phoneNumber: "+63 979 794 0990",
+        appType: "Replacement",
+        paymentStatus: "Failed",
+        schedule: "2026-10-30T14:30"
     }
 ];
 
-        // Function to shuffle (rumble) the array randomly (Fisher-Yates algorithm)
+
+
         function shuffleAppointments(array) {
+
             for (let i = array.length - 1; i > 0; i--) {
+
                 const j = Math.floor(Math.random() * (i + 1));
+
                 [array[i], array[j]] = [array[j], array[i]];
+
             }
+
             return array;
+
         }
 
-        // DOM element hooks
+
+
         const tableBody = document.getElementById('appointmentTableBody');
+
         const emptyState = document.getElementById('emptyState');
+
         const searchInput = document.getElementById('searchInput');
+
         const filterAppType = document.getElementById('filterAppType');
+
         const filterPayment = document.getElementById('filterPayment');
 
-        // Statistics labels
+
+
         const statTotal = document.getElementById('statTotal');
+
         const statPaid = document.getElementById('statPaid');
+
         const statFailed = document.getElementById('statFailed');
+
         const statToday = document.getElementById('statToday');
 
-        // Initialize application on load
+
+
         window.addEventListener('DOMContentLoaded', () => {
+
             shuffleAppointments(appointments);
+
             renderTable();
+
             lucide.createIcons();
-            
+
+           
+
             searchInput.addEventListener('input', renderTable);
+
             filterAppType.addEventListener('change', renderTable);
+
             filterPayment.addEventListener('change', renderTable);
+
         });
 
-        // Mask email: e.g., "******@gmail.com"
+
+
         function maskEmail(email) {
+
             const parts = email.split('@');
+
             if (parts.length !== 2) return '******@gmail.com';
-            const domain = parts[1];
-            return `******@${domain}`;
+
+            return `******@${parts[1]}`;
+
         }
 
-        // Mask phone number: e.g., keep last 2 digits, rest as asterisks -> "*********21"
+
+
         function maskPhone(phone) {
+
             const cleaned = phone.replace(/\s+/g, '');
+
             if (cleaned.length <= 2) return '**********';
+
             const lastTwo = cleaned.slice(-2);
-            const maskLength = Math.max(0, cleaned.length - 2);
-            return '*'.repeat(maskLength) + lastTwo;
+
+            return '*'.repeat(Math.max(0, cleaned.length - 2)) + lastTwo;
+
         }
 
-        // Render table records based on filters
+
+
         function renderTable() {
+
             const query = searchInput.value.toLowerCase().trim();
+
             const typeVal = filterAppType.value;
+
             const payVal = filterPayment.value;
 
+
+
             const filtered = appointments.filter(item => {
-                const matchQuery = item.fullName.toLowerCase().includes(query) || 
-                                   item.email.toLowerCase().includes(query) || 
+
+                const matchQuery = item.fullName.toLowerCase().includes(query) ||
+
+                                   item.email.toLowerCase().includes(query) ||
+
                                    item.phoneNumber.toLowerCase().includes(query);
+
                 const matchType = typeVal === "" || item.appType === typeVal;
+
                 const matchPay = payVal === "" || item.paymentStatus === payVal;
+
                 return matchQuery && matchType && matchPay;
+
             });
+
+
 
             updateStats();
 
+
+
             if (filtered.length === 0) {
+
                 tableBody.innerHTML = '';
+
                 emptyState.classList.remove('hidden');
+
                 return;
+
             }
+
+
 
             emptyState.classList.add('hidden');
+
             tableBody.innerHTML = filtered.map((item, index) => {
+
                 const originalIndex = appointments.indexOf(item);
-                
+
+               
+
                 let paymentBadgeClass = "bg-slate-100 text-slate-700 border-slate-200";
+
                 let paymentIcon = "check";
+
                 if (item.paymentStatus === "Paid") {
+
                     paymentBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+
                     paymentIcon = "check-circle";
+
                 } else if (item.paymentStatus === "Failed") {
+
                     paymentBadgeClass = "bg-rose-50 text-rose-700 border-rose-200";
+
                     paymentIcon = "x-circle";
+
                 }
 
+
+
                 let typeBadgeClass = "bg-indigo-50 text-indigo-700 border-indigo-100";
+
                 if (item.appType === "Renewal") typeBadgeClass = "bg-blue-50 text-blue-700 border-blue-100";
+
                 if (item.appType === "Replacement") typeBadgeClass = "bg-purple-50 text-purple-700 border-purple-100";
 
+
+
                 const formattedDate = formatScheduleDate(item.schedule);
+
                 const maskedEmailStr = maskEmail(item.email);
+
                 const maskedPhoneStr = maskPhone(item.phoneNumber);
 
+
+
                 return `
+
                     <tr class="hover:bg-slate-50/80 transition-colors">
-                        <td class="py-4 px-6 font-medium text-slate-800">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-indigo-600 font-bold text-xs">
+
+                        <td class="py-3.5 px-5 font-medium text-slate-800">
+
+                            <div class="flex items-center space-x-2.5">
+
+                                <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-indigo-600 font-bold text-[11px] shrink-0">
+
                                     ${getInitials(item.fullName)}
+
                                 </div>
-                                <span>${escapeHtml(item.fullName)}</span>
+
+                                <span class="truncate max-w-[130px] sm:max-w-none">${escapeHtml(item.fullName)}</span>
+
                             </div>
+
                         </td>
-                        <td class="py-4 px-6 text-slate-600">${escapeHtml(maskedEmailStr)}</td>
-                        <td class="py-4 px-6 text-slate-600">${escapeHtml(maskedPhoneStr)}</td>
-                        <td class="py-4 px-6">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold border ${typeBadgeClass}">
+
+                        <td class="py-3.5 px-5 text-slate-600 text-xs">${escapeHtml(maskedEmailStr)}</td>
+
+                        <td class="py-3.5 px-5 text-slate-600 text-xs">${escapeHtml(maskedPhoneStr)}</td>
+
+                        <td class="py-3.5 px-5">
+
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border ${typeBadgeClass}">
+
                                 ${escapeHtml(item.appType)}
+
                             </span>
+
                         </td>
-                        <td class="py-4 px-6">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${paymentBadgeClass}">
+
+                        <td class="py-3.5 px-5">
+
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${paymentBadgeClass}">
+
                                 <i data-lucide="${paymentIcon}" class="w-3 h-3 mr-1"></i> ${escapeHtml(item.paymentStatus)}
+
                             </span>
+
                         </td>
-                        <td class="py-4 px-6 text-slate-600 text-xs font-medium">
+
+                        <td class="py-3.5 px-5 text-slate-600 text-xs font-medium whitespace-nowrap">
+
                             <div class="flex items-center">
-                                <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-slate-400"></i>
+
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1 text-slate-400"></i>
+
                                 ${formattedDate}
+
                             </div>
+
                         </td>
-                        <td class="py-4 px-6 text-right space-x-2">
+
+                        <td class="py-3.5 px-5 text-right space-x-1 whitespace-nowrap">
+
                             <button onclick="editAppointment(${originalIndex})" title="Edit" class="p-1.5 bg-slate-100 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 rounded-lg transition-colors">
-                                <i data-lucide="pencil" class="w-4 h-4"></i>
+
+                                <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+
                             </button>
+
                             <button onclick="deleteAppointment(${originalIndex})" title="Delete" class="p-1.5 bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 rounded-lg transition-colors">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+
                             </button>
+
                         </td>
+
                     </tr>
+
                 `;
+
             }).join('');
 
+
+
             lucide.createIcons();
+
         }
 
-        // Update top summary cards count with 99+ cap
+
+
         function updateStats() {
+
             const totalCount = appointments.length;
+
             const paidCount = appointments.filter(i => i.paymentStatus === 'Paid').length;
+
             const failedCount = appointments.filter(i => i.paymentStatus === 'Failed').length;
-            
+
+           
+
             const todayStr = new Date().toISOString().split('T')[0];
+
             const todayCount = appointments.filter(i => i.schedule.startsWith(todayStr)).length;
+
             const finalTodayCount = todayCount > 0 ? todayCount : totalCount;
 
+
+
             statTotal.textContent = totalCount > 99 ? '99+' : totalCount;
+
             statPaid.textContent = paidCount > 99 ? '99+' : paidCount;
+
             statFailed.textContent = failedCount > 99 ? '99+' : failedCount;
+
             statToday.textContent = finalTodayCount > 99 ? '99+' : finalTodayCount;
+
         }
 
-        // Modal Management
+
+
         function openModal(editMode = false) {
+
             document.getElementById('appointmentModal').classList.remove('hidden');
+
             if (!editMode) {
+
                 document.getElementById('modalTitle').innerHTML = `<i data-lucide="user-plus" class="w-5 h-5 mr-2 text-indigo-600"></i> New Passport Booking`;
+
                 document.getElementById('appointmentForm').reset();
+
                 document.getElementById('editIndex').value = "-1";
+
                 const tomorrow = new Date();
+
                 tomorrow.setDate(tomorrow.getDate() + 1);
+
                 tomorrow.setHours(10, 0, 0, 0);
+
                 document.getElementById('scheduleDate').value = tomorrow.toISOString().slice(0, 16);
+
             }
+
             lucide.createIcons();
+
         }
+
+
 
         function closeModal() {
+
             document.getElementById('appointmentModal').classList.add('hidden');
+
         }
 
-        // Handle Form Submit (Create or Update)
+
+
         function handleFormSubmit(event) {
+
             event.preventDefault();
+
             const editIndex = parseInt(document.getElementById('editIndex').value);
-            
+
+           
+
             const newRecord = {
+
                 fullName: document.getElementById('fullName').value.trim(),
+
                 email: document.getElementById('email').value.trim(),
+
                 phoneNumber: document.getElementById('phoneNumber').value.trim(),
+
                 appType: document.getElementById('appType').value,
+
                 paymentStatus: document.getElementById('paymentStatus').value,
+
                 schedule: document.getElementById('scheduleDate').value
+
             };
 
+
+
             if (editIndex === -1) {
+
                 appointments.unshift(newRecord);
+
                 showToast("Appointment successfully created!", "success");
+
             } else {
+
                 appointments[editIndex] = newRecord;
+
                 showToast("Appointment successfully updated!", "success");
+
             }
+
+
 
             closeModal();
+
             renderTable();
+
         }
 
-        // Edit appointment record
+
+
         function editAppointment(index) {
+
             const item = appointments[index];
+
             document.getElementById('editIndex').value = index;
+
             document.getElementById('fullName').value = item.fullName;
+
             document.getElementById('email').value = item.email;
+
             document.getElementById('phoneNumber').value = item.phoneNumber;
+
             document.getElementById('appType').value = item.appType;
+
             document.getElementById('paymentStatus').value = item.paymentStatus;
+
             document.getElementById('scheduleDate').value = item.schedule;
 
+
+
             document.getElementById('modalTitle').innerHTML = `<i data-lucide="pencil" class="w-5 h-5 mr-2 text-indigo-600"></i> Edit Appointment Record`;
+
             openModal(true);
+
         }
 
-        // Delete appointment record
+
+
         function deleteAppointment(index) {
+
             if (confirm("Are you sure you want to remove this appointment record?")) {
+
                 appointments.splice(index, 1);
+
                 renderTable();
+
                 showToast("Appointment deleted successfully.", "info");
+
             }
+
         }
 
-        // Export appointments list to CSV file
+
+
         function exportToCSV() {
+
             if (appointments.length === 0) {
+
                 showToast("No data available to export.", "error");
+
                 return;
+
             }
+
+
 
             let csvContent = "Full Name,Email,Phone Number,Application Type,Payment Status,Schedule\n";
+
             appointments.forEach(item => {
+
                 csvContent += `"${item.fullName}","${item.email}","${item.phoneNumber}","${item.appType}","${item.paymentStatus}","${item.schedule}"\n`;
+
             });
 
+
+
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
             const url = URL.createObjectURL(blob);
+
             const link = document.createElement("a");
+
             link.setAttribute("href", url);
+
             link.setAttribute("download", `passport_appointments_${new Date().toISOString().slice(0,10)}.csv`);
+
             document.body.appendChild(link);
+
             link.click();
+
             document.body.removeChild(link);
+
             showToast("CSV file downloaded successfully!", "success");
+
         }
 
-        // Helper utilities
+
+
         function getInitials(name) {
+
             return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
         }
+
+
 
         function formatScheduleDate(dateStr) {
+
             try {
+
                 const date = new Date(dateStr);
-                return date.toLocaleString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric', 
-                    hour: 'numeric', 
+
+                return date.toLocaleString('en-US', {
+
+                    month: 'short',
+
+                    day: 'numeric',
+
+                    year: 'numeric',
+
+                    hour: 'numeric',
+
                     minute: '2-digit',
-                    hour12: true 
+
+                    hour12: true
+
                 });
+
             } catch (e) {
+
                 return dateStr;
+
             }
+
         }
+
+
 
         function escapeHtml(str) {
-            return str.replace(/[&<>'"]/g, 
+
+            return str.replace(/[&<>'"]/g,
+
                 tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+
             );
+
         }
+
+
 
         function showToast(message, type = 'success') {
+
             const container = document.getElementById('toastContainer');
+
             const toast = document.createElement('div');
-            
+
+           
+
             let bgClass = "bg-slate-800 text-white";
+
             let icon = "check-circle";
+
             if (type === 'success') { bgClass = "bg-emerald-600 text-white"; icon = "check-circle"; }
+
             if (type === 'error') { bgClass = "bg-rose-600 text-white"; icon = "alert-octagon"; }
+
             if (type === 'info') { bgClass = "bg-indigo-600 text-white"; icon = "info"; }
 
-            toast.className = `flex items-center space-x-2 px-4 py-3 rounded-xl shadow-lg text-sm font-medium transition-all transform translate-y-2 opacity-0 ${bgClass}`;
-            toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i><span>${message}</span>`;
-            
+
+
+            toast.className = `flex items-center space-x-2 px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-medium transition-all transform translate-y-2 opacity-0 ${bgClass}`;
+
+            toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i><span>${message}</span>`;
+
+           
+
             container.appendChild(toast);
+
             lucide.createIcons();
 
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 10);
+
 
             setTimeout(() => {
+
+                toast.classList.remove('translate-y-2', 'opacity-0');
+
+            }, 10);
+
+
+
+            setTimeout(() => {
+
                 toast.classList.add('translate-y-2', 'opacity-0');
+
                 setTimeout(() => toast.remove(), 300);
+
             }, 3000);
+
         }
+
     </script>
+
 </body>
+
 </html>
