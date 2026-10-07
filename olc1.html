@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clients Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -9,7 +10,7 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 30px;
+            padding: 15px;
             background: #434d47;
         }
 
@@ -17,7 +18,7 @@
             max-width: 1100px;
             margin: auto;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
@@ -50,7 +51,8 @@
 
         .search-bar input {
             padding: 8px;
-            width: 250px;
+            width: 100%;
+            max-width: 250px;
         }
 
         .search-bar button {
@@ -62,6 +64,7 @@
             cursor: pointer;
         }
 
+        /* --- TABLE STYLING (DESKTOP) --- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -106,21 +109,65 @@
 
         .actions a:nth-child(1) { background: #33a34c; }
         .actions a:nth-child(2) { background: #dc3545; }
-        .actions a:nth-child(3) { background: #000000; }
-        .actions a:nth-child(4) { background: #040404; }
-        .actions a:nth-child(5) { background: #000000; }
-
-        @media (min-width: 768px) {
-            .actions a {
-                flex: 1 1 calc(25% - 6px);
-            }
-        }
+        .actions a:nth-child(3) { background: #212529; }
+        .actions a:nth-child(4) { background: #fd7e14; }
+        .actions a:nth-child(5) { background: #007bff; }
 
         .toggle-button {
             cursor: pointer;
             color: #007bff;
             margin-left: 5px;
             font-weight: bold;
+        }
+
+        /* --- MOBILE CARD VIEW STYLING --- */
+        .mobile-card-container {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .content-box {
+                padding: 15px;
+            }
+            /* Hide Desktop Table */
+            table {
+                display: none;
+            }
+            /* Show Mobile Cards Container */
+            .mobile-card-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .client-card {
+                background: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            }
+            .client-card-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+            .client-card-row span.label {
+                font-weight: bold;
+                color: #555;
+            }
+            .client-card .actions {
+                margin-top: 12px;
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+            }
+            .actions a {
+                flex: 1 1 calc(33% - 6px);
+                font-size: 10px;
+            }
         }
 
         /* MODAL */
@@ -135,6 +182,7 @@
             visibility: hidden;
             opacity: 0;
             transition: 0.3s;
+            z-index: 1000;
         }
 
         .modal.active {
@@ -148,6 +196,8 @@
             border-radius: 10px;
             text-align: center;
             min-width: 280px;
+            width: 90%;
+            max-width: 400px;
         }
 
         .yes-btn { background: #28a745; color: white; }
@@ -163,21 +213,19 @@
 
         .loading {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.8);
             z-index: 9999;
         }
 
         .spinner {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border: 6px solid #ddd;
             border-top: 6px solid #007bff;
             border-radius: 50%;
@@ -198,8 +246,11 @@
 
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
+            left: 20px;
+            max-width: 350px;
+            margin: 0 auto;
             background: #333;
             color: #fff;
             padding: 12px 18px;
@@ -208,6 +259,7 @@
             transform: translateY(20px);
             transition: 0.4s;
             z-index: 9999;
+            text-align: center;
         }
 
         .toast.show {
@@ -226,7 +278,7 @@
 <body>
 
 <div class="content-box">
-    <h2>Loan Records </h2>
+    <h2>Loan Records</h2>
 
     <div class="btn-row">
         <a class="back-btn" href="#">Back</a>
@@ -238,6 +290,7 @@
         <button type="button"><i class="fas fa-search"></i></button>
     </div>
 
+    <!-- DESKTOP TABLE VIEW -->
     <table id="clientTable">
         <thead>
             <tr>
@@ -252,7 +305,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Row 1 -->
             <tr data-id="1">
                 <td>ID-1001</td>
                 <td>Juan Dela Cruz</td>
@@ -261,7 +313,7 @@
                 <td>
                     <span id="amount-1" style="display:none;">₱1,500.00</span>
                     <span id="hidden-1">₱******</span>
-                    <span class="toggle-button" onclick="toggleAmount(1)">.</span>
+                    <span class="toggle-button" onclick="toggleAmount(1)">👁</span>
                 </td>
                 <td id="pay-status-1">Not Paid</td>
                 <td><span id="acc-status-1" style="color:green;font-weight:bold;">Unrestricted</span></td>
@@ -273,7 +325,6 @@
                     <a onclick='openBalanceModal(1)'>𝗕𝗮𝗹𝗮𝗻𝗰𝗲 𝗥𝗲𝗰𝗼𝘃𝗲𝗿</a>
                 </td>
             </tr>
-            <!-- Row 2 -->
             <tr data-id="2">
                 <td>ID-1002</td>
                 <td>Maria Santos</td>
@@ -294,7 +345,6 @@
                     <a onclick='openBalanceModal(2)'>𝗕𝗮𝗹𝗮𝗻𝗰𝗲 𝗥𝗲𝗰𝗼𝘃𝗲𝗿</a>
                 </td>
             </tr>
-            <!-- Row 3 -->
             <tr data-id="3">
                 <td>ID-1003</td>
                 <td>Pedro Reyes</td>
@@ -317,6 +367,79 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- MOBILE CARD VIEW -->
+    <div class="mobile-card-container" id="mobileCardContainer">
+        <!-- Cards will dynamically sync or mirror the rows via JavaScript, or you can map them -->
+        <div class="client-card" data-id="1">
+            <div class="client-card-row"><span class="label">ID Number:</span> <span>ID-1001</span></div>
+            <div class="client-card-row"><span class="label">Name:</span> <span>Juan Dela Cruz</span></div>
+            <div class="client-card-row"><span class="label">Email:</span> <span>j********om</span></div>
+            <div class="client-card-row"><span class="label">Phone:</span> <span>09********1</span></div>
+            <div class="client-card-row"><span class="label">Amount:</span> 
+                <span>
+                    <span id="m-amount-1" style="display:none;">₱1,500.00</span>
+                    <span id="m-hidden-1">₱******</span>
+                    <span class="toggle-button" onclick="toggleAmountMobile(1)">👁</span>
+                </span>
+            </div>
+            <div class="client-card-row"><span class="label">Payment Status:</span> <span id="m-pay-status-1">Not Paid</span></div>
+            <div class="client-card-row"><span class="label">Account Status:</span> <span id="m-acc-status-1" style="color:green;font-weight:bold;">Unrestricted</span></div>
+            <div class='actions'>
+                <a onclick='openModal(1, "paid")'>𝗣𝗮𝗶𝗱</a>
+                <a onclick='openModal(1, "delete")'>𝗗𝗲𝗹𝗲𝘁𝗲</a>
+                <a onclick='openCreditModal(1)'>𝗖𝗿𝗲𝗱𝗶𝘁</a>
+                <a onclick='openRestriction(1)'>𝗥𝗲𝘀𝘁𝗿𝗶𝗰𝘁</a>
+                <a onclick='openBalanceModal(1)'>𝗥𝗲𝗰𝗼𝘃𝗲𝗿</a>
+            </div>
+        </div>
+
+        <div class="client-card" data-id="2">
+            <div class="client-card-row"><span class="label">ID Number:</span> <span>ID-1002</span></div>
+            <div class="client-card-row"><span class="label">Name:</span> <span>Maria Santos</span></div>
+            <div class="client-card-row"><span class="label">Email:</span> <span>m********et</span></div>
+            <div class="client-card-row"><span class="label">Phone:</span> <span>09********2</span></div>
+            <div class="client-card-row"><span class="label">Amount:</span> 
+                <span>
+                    <span id="m-amount-2" style="display:none;">₱0.00</span>
+                    <span id="m-hidden-2">₱******</span>
+                    <span class="toggle-button" onclick="toggleAmountMobile(2)">👁</span>
+                </span>
+            </div>
+            <div class="client-card-row"><span class="label">Payment Status:</span> <span id="m-pay-status-2">Paid</span></div>
+            <div class="client-card-row"><span class="label">Account Status:</span> <span id="m-acc-status-2" style="color:red;font-weight:bold;">Restricted</span></div>
+            <div class='actions'>
+                <a onclick='openModal(2, "paid")'>𝗣𝗮𝗶𝗱</a>
+                <a onclick='openModal(2, "delete")'>𝗗𝗲𝗹𝗲𝘁𝗲</a>
+                <a onclick='openCreditModal(2)'>𝗖𝗿𝗲𝗱𝗶𝘁</a>
+                <a onclick='openRestriction(2)'>𝗥𝗲𝘀𝘁𝗿𝗶𝗰𝘁</a>
+                <a onclick='openBalanceModal(2)'>𝗥𝗲𝗰𝗼𝘃𝗲𝗿</a>
+            </div>
+        </div>
+
+        <div class="client-card" data-id="3">
+            <div class="client-card-row"><span class="label">ID Number:</span> <span>ID-1003</span></div>
+            <div class="client-card-row"><span class="label">Name:</span> <span>Pedro Reyes</span></div>
+            <div class="client-card-row"><span class="label">Email:</span> <span>p********gh</span></div>
+            <div class="client-card-row"><span class="label">Phone:</span> <span>09********3</span></div>
+            <div class="client-card-row"><span class="label">Amount:</span> 
+                <span>
+                    <span id="m-amount-3" style="display:none;">₱3,250.50</span>
+                    <span id="m-hidden-3">₱******</span>
+                    <span class="toggle-button" onclick="toggleAmountMobile(3)">👁</span>
+                </span>
+            </div>
+            <div class="client-card-row"><span class="label">Payment Status:</span> <span id="m-pay-status-3">Not Paid</span></div>
+            <div class="client-card-row"><span class="label">Account Status:</span> <span id="m-acc-status-3" style="color:green;font-weight:bold;">Unrestricted</span></div>
+            <div class='actions'>
+                <a onclick='openModal(3, "paid")'>𝗣𝗮𝗶𝗱</a>
+                <a onclick='openModal(3, "delete")'>𝗗𝗲𝗹𝗲𝘁𝗲</a>
+                <a onclick='openCreditModal(3)'>𝗖𝗿𝗲𝗱𝗶𝘁</a>
+                <a onclick='openRestriction(3)'>𝗥𝗲𝘀𝘁𝗿𝗶𝗰𝘁</a>
+                <a onclick='openBalanceModal(3)'>𝗥𝗲𝗰𝗼𝘃𝗲𝗿</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- MODALS -->
@@ -362,9 +485,19 @@ let selectedAction = "";
 function toggleAmount(id) {
     let real = document.getElementById('amount-' + id);
     let hidden = document.getElementById('hidden-' + id);
+    if(real && hidden) {
+        real.style.display = real.style.display === 'none' ? 'inline' : 'none';
+        hidden.style.display = hidden.style.display === 'none' ? 'inline' : 'none';
+    }
+}
 
-    real.style.display = real.style.display === 'none' ? 'inline' : 'none';
-    hidden.style.display = hidden.style.display === 'none' ? 'inline' : 'none';
+function toggleAmountMobile(id) {
+    let real = document.getElementById('m-amount-' + id);
+    let hidden = document.getElementById('m-hidden-' + id);
+    if(real && hidden) {
+        real.style.display = real.style.display === 'none' ? 'inline' : 'none';
+        hidden.style.display = hidden.style.display === 'none' ? 'inline' : 'none';
+    }
 }
 
 function openModal(id, action) {
@@ -451,24 +584,37 @@ function simulateAsyncAction(action, id, extra = null) {
         let msg = "";
 
         if (action === "paid") {
-            document.getElementById("amount-" + id).innerText = "₱0.00";
-            document.getElementById("pay-status-" + id).innerText = "Paid";
+            // Update table
+            if(document.getElementById("amount-" + id)) document.getElementById("amount-" + id).innerText = "₱0.00";
+            if(document.getElementById("pay-status-" + id)) document.getElementById("pay-status-" + id).innerText = "Paid";
+            // Update mobile card
+            if(document.getElementById("m-amount-" + id)) document.getElementById("m-amount-" + id).innerText = "₱0.00";
+            if(document.getElementById("m-pay-status-" + id)) document.getElementById("m-pay-status-" + id).innerText = "Paid";
+            
             msg = "Marked as Paid successfully!";
         } else if (action === "delete") {
             let row = document.querySelector(`tr[data-id='${id}']`);
             if (row) row.remove();
+            let card = document.querySelector(`.client-card[data-id='${id}']`);
+            if (card) card.remove();
+            
             msg = "Record deleted successfully!";
         } else if (action === "increase_credit") {
             msg = `Credit increased successfully by ₱${extra}!`;
         } else if (action === "restriction") {
+            // Update table and mobile card statuses
             let statusSpan = document.getElementById("acc-status-" + id);
-            if (statusSpan.innerText === "Unrestricted") {
-                statusSpan.innerText = "Restricted";
-                statusSpan.style.color = "red";
+            let mStatusSpan = document.getElementById("m-acc-status-" + id);
+            
+            let currentText = statusSpan ? statusSpan.innerText : mStatusSpan.innerText;
+
+            if (currentText === "Unrestricted") {
+                if(statusSpan) { statusSpan.innerText = "Restricted"; statusSpan.style.color = "red"; }
+                if(mStatusSpan) { mStatusSpan.innerText = "Restricted"; mStatusSpan.style.color = "red"; }
                 msg = "Account status updated to restricted!";
             } else {
-                statusSpan.innerText = "Unrestricted";
-                statusSpan.style.color = "green";
+                if(statusSpan) { statusSpan.innerText = "Unrestricted"; statusSpan.style.color = "green"; }
+                if(mStatusSpan) { mStatusSpan.innerText = "Unrestricted"; mStatusSpan.style.color = "green"; }
                 msg = "Account status updated to unrestricted!";
             }
         } else if (action === "balance_recover") {
@@ -491,11 +637,19 @@ function showToast(message) {
 
 function filterTable() {
     let input = document.getElementById("searchInput").value.toLowerCase();
+    
+    // Filter desktop rows
     let rows = document.querySelectorAll("#clientTable tbody tr");
-
     rows.forEach(row => {
         let text = row.innerText.toLowerCase();
         row.style.display = text.includes(input) ? "" : "none";
+    });
+
+    // Filter mobile cards
+    let cards = document.querySelectorAll(".client-card");
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "" : "none";
     });
 }
 </script>
